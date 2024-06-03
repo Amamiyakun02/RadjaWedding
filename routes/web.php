@@ -28,3 +28,6 @@ Route::get('/section', function () {
 Route::get('/customers/', function () {
     return view('Customers.Content.landing-page');
 });
+Route::get('/login', function () {
+    return view('Authenctication.login');
+});

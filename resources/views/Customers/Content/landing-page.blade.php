@@ -3,9 +3,9 @@
 @section('content')
 <section id="hero">
     <div class="hero-container">
-        <h1>Easy start with Vlava</h1>
-        <h2>We are team of talented designers making websites with Bootstrap</h2>
-        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <h1>AIMER</h1>
+        <h2>ARTIFICIAL INTELLIGENCE FOR MENTORSHIP & ENHANCED RELATIONSHIP</h2>
+        <a href="#about" class="btn-get-started scrollto">Apply Now</a>
     </div>
   </section><!-- End Hero -->
 <main id="main">
