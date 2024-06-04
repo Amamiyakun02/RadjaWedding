@@ -5,7 +5,7 @@
     <div class="hero-container">
         <h1>Cantik Sempurna, Mudah dan Cepat</h1>
         <h2>Solusi Layanan Pernikahan untuk Anda</h2>
-        <a href="#about" class="btn-get-started scrollto">Dapatkan Sekarang</a>
+        <a href="#about" class="btn-get-started scrollto">Pesan Sekarang</a>
     </div>
   </section><!-- End Hero -->
 <main id="main">

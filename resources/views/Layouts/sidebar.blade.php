@@ -15,7 +15,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="index.html">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard User</span></a>
+            <span>DASHBOARD</span></a>
     </li>
 
     <!-- Divider -->
@@ -59,7 +59,7 @@
             </div>
         </div>
     </li>
-    
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
