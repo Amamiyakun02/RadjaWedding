@@ -8,5 +8,4 @@
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vlava-free-bootstrap-one-page-template/ -->
         Designed by <a href="https://bootstrapmade.com/">K3</a>
       </div>
-    </div>
   </footer><!-- End Footer -->
