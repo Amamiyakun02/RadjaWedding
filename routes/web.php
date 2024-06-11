@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PaketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -42,3 +43,8 @@ Route::get('/customers/', function () {
 //Routes Barang
 Route::get('/barang/', [BarangController::class, 'index']);
 Route::get('/barang/tambah', [BarangController::class, 'create']);
+
+
+//Routes Paket
+Route::get('/paket', [PaketController::class, 'index']);
+Route::get('/paket/tambah', [PaketController::class, 'create']);

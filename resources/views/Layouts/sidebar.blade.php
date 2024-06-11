@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ asset('Assets-Admin/') }}index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon rotate-n-15">
 {{--            <i class="fas fa-laugh-wink"></i>--}}
         </div>
@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>DASHBOARD</span></a>
     </li>
@@ -53,9 +53,11 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Kelola :</h6>
-                <a class="collapse-item" href="{{ asset('Assets-Admin/') }}utilities-color.html">Pesanan</a>
-                <a class="collapse-item" href="{{ asset('Assets-Admin/') }}utilities-border.html">Paket Pesanan</a>
-                <a class="collapse-item" href="{{ asset('Assets-Admin/') }}utilities-animation.html">User</a>
+                <a class="collapse-item" href="/barang">Barang</a>
+                <a class="collapse-item" href="/layanan">Layanan</a>
+                <a class="collapse-item" href="/pesanan">Pesanan</a>
+                <a class="collapse-item" href="/paket">Paket Pemesanan</a>
+                <a class="collapse-item" href="/pengguna">Pengguna</a>
             </div>
         </div>
     </li>
@@ -79,10 +81,11 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tambah:</h6>
-                <a class="collapse-item" href="{{ asset('Assets-Admin/') }}login.html">Barang</a>
-                <a class="collapse-item" href="{{ asset('Assets-Admin/') }}register.html">Paket</a>
-                <a class="collapse-item" href="{{ asset('Assets-Admin/') }}forgot-password.html">Pesanan</a>
-                <a class="collapse-item" href="{{ asset('Assets-Admin/') }}forgot-password.html">User</a>
+                <a class="collapse-item" href="/barang/tambah">Barang</a>
+                <a class="collapse-item" href="/layanan/tambah">Layanan
+                <a class="collapse-item" href="/paket/tambah">Paket</a>
+                <a class="collapse-item" href="/pemesanan/tambah">Pemesanan</a>
+                <a class="collapse-item" href="/pengguna/tambah">Pengguna</a>
             </div>
         </div>
 
