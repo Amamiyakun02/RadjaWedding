@@ -41,3 +41,4 @@ Route::get('/customers/', function () {
 
 //Routes Barang
 Route::get('/barang/', [BarangController::class, 'index']);
+Route::get('/barang/tambah', [BarangController::class, 'create']);
