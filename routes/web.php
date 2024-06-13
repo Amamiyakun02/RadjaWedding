@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\LayananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -48,3 +49,7 @@ Route::get('/barang/tambah', [BarangController::class, 'create']);
 //Routes Paket
 Route::get('/paket', [PaketController::class, 'index']);
 Route::get('/paket/tambah', [PaketController::class, 'create']);
+
+
+//Routes Layanan
+Route::get('/layanan', [LayananController::class, 'index']);

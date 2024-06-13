@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('Assets-Admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('mdb/css/mdb.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -76,6 +77,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('Assets-Admin/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('mdb/js/mdb.umd.min.js') }}"></script>
 
     <!-- Page level plugins -->
     <script src="{{ asset('Assets-Admin/vendor/chart.js/Chart.min.js') }}"></script>
