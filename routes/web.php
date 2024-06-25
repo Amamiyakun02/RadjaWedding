@@ -6,7 +6,8 @@ use App\Http\Controllers\LayananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\PesananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +54,10 @@ Route::get('/paket/tambah', [PaketController::class, 'create']);
 
 //Routes Layanan
 Route::get('/layanan', [LayananController::class, 'index']);
+Route::get('/layanan/tambah', [LayananController::class, 'create']);
+
+Route::get('/pesanan', [PesananController::class, 'index']);
+Route::get('pesanan/tambah', [PesananController::class, 'create']);
+
+
+Route::get('/riwayat', [RiwayatController::class, 'index']);

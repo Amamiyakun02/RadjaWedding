@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('pengembalian_barang', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pemesanan');
-            $table->unsignedBigInteger('id_barang');
-            $table->string('status_pengembalian', 50);
-            $table->date('tanggal_pengembalian');
+            $table->unsignedBigInteger('penyewaanID');
+            $table->unsignedBigInteger('barangID');
+            $table->date('ReturnDate');
+            $table->enum('Condition', ['good', 'damaged', 'lost'])->default('good');
+            $table->text('Notes')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_pemesanan')->references('id')->on('pemesanan')->onDelete('cascade');
-            $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
+            $table->foreign('penyewaanID')->references('id')->on('penyewaan')->onDelete('cascade');
+            $table->foreign('barangID')->references('id')->on('barang')->onDelete('cascade');
         });
     }
 

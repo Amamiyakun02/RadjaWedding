@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 100);
-            $table->string('username', 50)->unique();
-            $table->string('telepon', 15);
-            $table->string('email', 100)->unique();
-            $table->text('alamat')->nullable();
-            $table->string('password', 255);
-            $table->string('role', 50);
-            $table->string('jenis_kelamin', 10);
-            $table->date('tanggal_lahir');
+            $table->string('Name', 100);
+            $table->string('Email', 100)->unique();
+            $table->string('Phone', 15)->nullable();
+            $table->text('Address')->nullable();
+            $table->enum('UserType', ['customer', 'admin'])->default('customer');
+            $table->enum('Gender', ['male', 'female'])->nullable();
+            $table->date('DateOfBirth')->nullable();
             $table->timestamps();
         });
     }
