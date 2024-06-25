@@ -17,10 +17,21 @@ class BarangModel extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'stock',
-        'category',
+        'Name', 'Description', 'Price', 'Stock', 'Category'
     ];
+
+    public function detailPenyewaan()
+    {
+        return $this->hasMany(DetailPenyewaanModel::class, 'barangID');
+    }
+
+    public function pengembalianBarang()
+    {
+        return $this->hasMany(PengembalianBarangModel::class, 'barangID');
+    }
+
+    public function bundleBarang()
+    {
+        return $this->hasMany(BundleBarangModel::class, 'barang_id');
+    }
 }

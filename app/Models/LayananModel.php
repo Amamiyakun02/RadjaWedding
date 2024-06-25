@@ -9,4 +9,18 @@ class LayananModel extends Model
 {
     use HasFactory;
     protected $table = 'layanan';
+    protected $fillable = [
+        'Name', 'Description', 'Price'
+    ];
+
+    public function detailBookings()
+    {
+        return $this->hasMany(DetailBookingModel::class, 'layananID');
+    }
+
+    public function bundleLayanan()
+    {
+        return $this->hasMany(BundleLayananModel::class, 'layananID');
+    }
+
 }

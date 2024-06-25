@@ -10,5 +10,13 @@ class BundleLayananModel extends Model
     use HasFactory;
 
         protected $table = 'bundle_layanan'; // Nama tabel sesuai dengan skema
+     protected $fillable = [
+        'BundleID', 'layananID'
+    ];
+
+    public function layanan()
+    {
+        return $this->belongsTo(LayananModel::class, 'layananID');
+    }
 
 }

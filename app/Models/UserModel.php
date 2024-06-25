@@ -14,68 +14,20 @@ class UserModel extends Model
 
 
     protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'address',
-        'user_type',
-        'gender',
-        'date_of_birth',
+        'name', 'email', 'phone', 'address', 'userType', 'gender', 'dateOfBirth'
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-    private mixed $name;
-
-    /**
-     * Scope a query to only include customers.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeCustomers($query): \Illuminate\Database\Eloquent\Builder
-    {
-        return $query->where('user_type', 'customer');
-    }
-
-    /**
-     * Scope a query to only include admins.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeAdmins($query)
-    {
-        return $query->where('user_type', 'admin');
-    }
-    public function rentals()
-    {
-        return $this->hasMany(Rental::class);
-    }
 
     public function bookings()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(DetailBookingModel::class, 'UserID');
     }
 
+    public function penyewaan()
+    {
+        return $this->hasMany(PenyewaanModel::class, 'UserID');
+    }
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(PembayaranModel::class, 'UserID');
     }
 }

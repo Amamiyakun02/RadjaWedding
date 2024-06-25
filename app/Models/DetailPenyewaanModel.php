@@ -9,4 +9,20 @@ class DetailPenyewaanModel extends Model
 {
     use HasFactory;
     protected $table = 'detail_penyewaan';
+    protected $fillable = [
+        'rentalID',
+        'barangID',
+        'quantity',
+        'price',
+    ];
+
+    public function penyewaan()
+    {
+        return $this->belongsTo(PenyewaanModel::class);
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo(BarangModel::class);
+    }
 }
