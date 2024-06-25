@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PenggunaModel extends Model
+class BundleLayananModel extends Model
 {
     use HasFactory;
+
+        protected $table = 'bundle_layanan'; // Nama tabel sesuai dengan skema
+
 }
