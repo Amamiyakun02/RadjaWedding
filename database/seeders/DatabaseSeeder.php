@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Panggil seeder lainnya di sini
+        // Panggil seeder lainnya di sinigit
         $this->call([
             UserSeeder::class,
             BarangSeeder::class,
