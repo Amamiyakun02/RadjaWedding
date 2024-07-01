@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             DetailBookingSeeder::class,
             PengembalianBarangSeeder::class,
             PembayaranSeeder::class,
-
         ]);
     }
 }

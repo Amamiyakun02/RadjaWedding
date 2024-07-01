@@ -17,7 +17,7 @@ class PenyewaanModel extends Model
         'tanggal_kembali_aktual',
         'total_harga',
         'status',
-        'bundle_id',
+        'bundleID',
     ];
 
     public function user()
@@ -25,19 +25,19 @@ class PenyewaanModel extends Model
         return $this->belongsTo(UserModel::class, 'UserID');
     }
 
-    public function rentalDetails()
+    public function detailPenyewaan()
     {
-        return $this->hasMany(DetailPenyewaanModel::class, 'RentalID');
+        return $this->hasOne(DetailPenyewaanModel::class, 'RentalID');
     }
 
-    public function bundleRental()
+    public function bundlePenyewaan()
     {
-        return $this->belongsTo(BundlePenyewaanModel::class, 'bundle_id');
+        return $this->belongsTo(BundlePenyewaanModel::class, 'BundleID');
     }
 
     public function pembayaran()
     {
         return $this->hasOne(PembayaranModel::class, 'rentalID');
     }
-
+//DONE
 }

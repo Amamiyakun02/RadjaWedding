@@ -25,5 +25,5 @@ class PengembalianBarangModel extends Model
     {
         return $this->belongsTo(BarangModel::class, 'barangID');
     }
-
+//DONE
 }

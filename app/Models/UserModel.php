@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class UserModel extends Model
@@ -23,18 +24,17 @@ class UserModel extends Model
         'jenis_pengguna',
         'jenis_kelamin',
         'tanggal_lahir',
-
     ];
 
-    public function bookings()
+    public function bookings(): HasMany
     {
         return $this->hasMany(BookingModel::class, 'UserID');
     }
 
-    public function penyewaan()
+    public function penyewaan(): HasMany
     {
         return $this->hasMany(PenyewaanModel::class, 'UserID');
     }
 
 }
-// DONE 
+// DONE

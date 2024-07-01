@@ -9,9 +9,11 @@ class BundleBarangModel extends Model
 {
     use HasFactory;
 
-        protected $table = 'bundle_barang'; // Nama tabel sesuai dengan skema
+    protected $table = 'bundle_barang'; // Nama tabel sesuai dengan skema
     protected $fillable = [
-        'bundle_id', 'barang_id', 'Quantity'
+        'bundle_id',
+        'barang_id',
+        'Quantity'
     ];
 
     public function bundlePenyewaan()
@@ -23,4 +25,5 @@ class BundleBarangModel extends Model
     {
         return $this->belongsTo(BarangModel::class, 'barang_id');
     }
+//    DONE
 }

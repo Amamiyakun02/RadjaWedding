@@ -18,11 +18,11 @@ class DetailPenyewaanModel extends Model
 
     public function penyewaan()
     {
-        return $this->belongsTo(PenyewaanModel::class);
+        return $this->belongsTo(PenyewaanModel::class, 'rentalID');
     }
 
     public function barang()
     {
-        return $this->belongsTo(BarangModel::class);
+        return $this->belongsTo(BarangModel::class, 'barangID');
     }
 }
