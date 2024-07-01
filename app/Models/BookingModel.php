@@ -10,7 +10,12 @@ class BookingModel extends Model
     use HasFactory;
     protected $table = 'boooking';
     protected $fillable = [
-        'UserID', 'BookingDate', 'ServiceDate', 'TotalPrice', 'Status', 'BundleID'
+        'UserID',
+        'tanggal_pemesanan',
+        'tanggal_layanan',
+        'total_harga',
+        'status',
+        'BundleID',
     ];
 
     public function user()

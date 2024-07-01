@@ -9,9 +9,12 @@ class LayananModel extends Model
 {
     use HasFactory;
     protected $table = 'layanan';
-    protected $fillable = [
-        'Name', 'Description', 'Price'
-    ];
+ protected $fillable = [
+        'nama',
+        'deskripsi',
+        'harga',
+        'url_gambar',
+     ];
 
     public function detailBookings()
     {

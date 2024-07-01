@@ -13,7 +13,7 @@ class DetailPenyewaanModel extends Model
         'rentalID',
         'barangID',
         'quantity',
-        'price',
+        'harga',
     ];
 
     public function penyewaan()

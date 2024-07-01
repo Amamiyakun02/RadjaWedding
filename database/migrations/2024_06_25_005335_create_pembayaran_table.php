@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('UserID');
-            $table->date('PaymentDate');
-            $table->decimal('Amount', 10, 2);
-            $table->enum('PaymentMethod', ['cash', 'credit_card', 'bank_transfer']);
-            $table->enum('Status', ['paid', 'unpaid'])->default('unpaid');
+            $table->date('tanggal_pembayaran');
+            $table->decimal('jumlah', 10, 2);
+            $table->enum('metode_pembayaran', ['tunai', 'kartu_kredit', 'transfer_bank']);
+            $table->enum('status', ['dibayar', 'belum_dibayar'])->default('belum_dibayar');
             $table->timestamps();
 
             $table->foreign('UserID')->references('id')->on('users')->onDelete('cascade');

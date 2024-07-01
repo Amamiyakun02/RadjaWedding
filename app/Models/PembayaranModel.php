@@ -9,7 +9,11 @@ class PembayaranModel extends Model
 {
     use HasFactory;
     protected $table = 'pembayaran';protected $fillable = [
-        'UserID', 'PaymentDate', 'Amount', 'PaymentMethod', 'Status'
+        'UserID',
+        'tanggal_pembayaran',
+        'jumlah',
+        'metode_pembayaran',
+        'status',
     ];
 
     public function user()

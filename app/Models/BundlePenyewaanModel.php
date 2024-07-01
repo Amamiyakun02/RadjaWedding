@@ -9,10 +9,11 @@ class BundlePenyewaanModel extends Model
 {
     use HasFactory;
     protected $table = 'bundle_penyewaan';
-     protected $fillable = [
-        'Name', 'Description', 'TotalPrice'
+    protected $fillable = [
+        'nama',
+        'deskripsi',
+        'total_harga',
     ];
-
     public function penyewaan()
     {
         return $this->hasMany(PenyewaanModel::class, 'BundleID');

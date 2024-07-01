@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('UserID');
-            $table->date('BookingDate');
-            $table->date('ServiceDate');
-            $table->decimal('TotalPrice', 10, 2);
-            $table->enum('Status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->date('tanggal_pemesanan');
+            $table->date('tanggal_layanan');
+            $table->decimal('total_harga', 10, 2);
+            $table->enum('status', ['pending', 'selesai', 'dibatalkan'])->default('pending');
             $table->unsignedBigInteger('BundleID')->nullable();
             $table->timestamps();
 

@@ -9,7 +9,11 @@ class PengembalianBarangModel extends Model
 {
     use HasFactory;
     protected $table = 'pengembalian_barang';protected $fillable = [
-        'penyewaanID', 'barangID', 'ReturnDate', 'Condition', 'Notes'
+        'penyewaanID',
+        'barangID',
+        'tanggal_pengembalian',
+        'kondisi',
+        'catatan',
     ];
 
     public function penyewaan()

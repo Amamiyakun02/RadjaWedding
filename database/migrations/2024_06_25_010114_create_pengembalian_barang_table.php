@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('penyewaanID');
             $table->unsignedBigInteger('barangID');
-            $table->date('ReturnDate');
-            $table->enum('Condition', ['good', 'damaged', 'lost'])->default('good');
-            $table->text('Notes')->nullable();
+            $table->date('tanggal_pengembalian');
+            $table->enum('kondisi', ['baik', 'rusak', 'hilang'])->default('baik');
+            $table->text('catatan')->nullable();
             $table->timestamps();
 
             $table->foreign('penyewaanID')->references('id')->on('penyewaan')->onDelete('cascade');

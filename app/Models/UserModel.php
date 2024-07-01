@@ -14,7 +14,15 @@ class UserModel extends Model
 
 
     protected $fillable = [
-        'name', 'email', 'phone', 'address', 'userType', 'gender', 'dateOfBirth'
+        'username',
+        'nama',
+        'email',
+        'telepon',
+        'alamat',
+        'jenis_pengguna',
+        'jenis_kelamin',
+        'tanggal_lahir',
+
     ];
 
     public function bookings()

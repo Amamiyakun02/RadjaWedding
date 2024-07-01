@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('bundle_penyewaan', function (Blueprint $table) {
             $table->id();
-            $table->string('Name', 100);
-            $table->text('Description')->nullable();
-            $table->decimal('TotalPrice', 10, 2);
+            $table->string('nama', 100);
+            $table->text('deskripsi')->nullable();
+            $table->decimal('total_harga', 10, 2);
             $table->timestamps();
         });
     }

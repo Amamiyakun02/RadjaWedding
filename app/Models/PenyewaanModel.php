@@ -12,10 +12,10 @@ class PenyewaanModel extends Model
 
     protected $fillable = [
         'userID',
-        'rental_date',
-        'return_date',
-        'actual_return_date',
-        'total_price',
+        'tanggal_sewa',
+        'tanggal_kembali',
+        'tanggal_kembali_aktual',
+        'total_harga',
         'status',
         'bundle_id',
     ];

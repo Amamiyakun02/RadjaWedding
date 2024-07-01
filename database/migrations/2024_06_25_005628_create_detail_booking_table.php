@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('BookingID');
             $table->unsignedBigInteger('layananID');
-            $table->decimal('Price', 10, 2);
+            $table->decimal('harga', 10, 2);
             $table->timestamps();
 
             $table->foreign('BookingID')->references('id')->on('bookings')->onDelete('cascade');

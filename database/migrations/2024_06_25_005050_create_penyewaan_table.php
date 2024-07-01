@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('penyewaan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('UserID');
-            $table->date('RentalDate');
-            $table->date('ReturnDate');
-            $table->date('ActualReturnDate')->nullable();
-            $table->decimal('TotalPrice', 10, 2);
-            $table->enum('Status', ['pending', 'completed', 'cancelled', 'returned'])->default('pending');
+            $table->date('tanggal_sewa');
+            $table->date('tanggal_kembali');
+            $table->date('tanggal_kembali_aktual')->nullable();
+            $table->decimal('total_harga', 10, 2);
+            $table->enum('status', ['pending', 'selesai', 'dibatalkan', 'dikembalikan'])->default('pending');
             $table->unsignedBigInteger('BundleID')->nullable();
             $table->timestamps();
 

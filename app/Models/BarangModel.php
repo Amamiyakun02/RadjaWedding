@@ -17,9 +17,13 @@ class BarangModel extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'Name', 'Description', 'Price', 'Stock', 'Category'
+        'nama',
+        'deskripsi',
+        'harga',
+        'stok',
+        'kategori',
+        'url_gambar',
     ];
-
     public function detailPenyewaan()
     {
         return $this->hasMany(DetailPenyewaanModel::class, 'barangID');

@@ -10,7 +10,7 @@ class DetailBookingModel extends Model
     use HasFactory;
     protected $table = 'detail_booking';
     protected $fillable = [
-        'BookingID', 'layananID', 'Price'
+        'BookingID', 'layananID', 'harga'
     ];
 
     public function booking()

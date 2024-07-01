@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('RentalID');
             $table->unsignedBigInteger('barangID');
             $table->integer('Quantity');
-            $table->decimal('Price', 10, 2);
+            $table->decimal('harga', 10, 2);
             $table->timestamps();
 
             $table->foreign('RentalID')->references('id')->on('penyewaan')->onDelete('cascade');
