@@ -4,19 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BarangModel;
-use App\Models\BundleBarangModel;
+use App\Models\PengembalianBarangModel;
 use Illuminate\Http\Request;
 
-class BarangController extends Controller
+
+class PengembalianBarangController extends Controller
 {
     public function index()
     {
-        return view('Admin.Barang.index');
+
     }
 
-    public function create(){
-        return view('Admin.Barang.create');
+    public function create()
+    {
+
     }
+
     public function store(Request $request){
 
     }
@@ -25,6 +28,7 @@ class BarangController extends Controller
 
     }
 
+
     public function edit($id){
 
     }
@@ -32,6 +36,7 @@ class BarangController extends Controller
     public function update(Request $request, $id){
 
     }
+
 
     public function destroy($id){
 

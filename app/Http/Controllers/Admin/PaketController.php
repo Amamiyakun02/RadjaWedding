@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Models\PaketModel;
+use App\Models\BundlePenyewaanModel;
+use App\Models\BundleBarangModel;
+use App\Models\BundleLayananModel;
 use Illuminate\Http\Request;
 
 class PaketController extends Controller
 {
-        public function index()
+    public function index()
     {
         return view('Admin.Paket.index');
     }
@@ -19,20 +21,17 @@ class PaketController extends Controller
 
     }
 
-    public function show(PaketModel $barangModel){
-
-    }
-    public function edit(PaketModel $barangModel){
+    public function edit($id){
 
     }
 
-    public function update(Request $request, PaketModel $barangModel){
+    public function update(Request $request){
 
     }
-    public function destroy(PaketModel $barangModel){
+    public function destroy($id){
 
     }
-    public function getBarang(request $request){
+    public function getPaket(request $request){
 
     }
 }

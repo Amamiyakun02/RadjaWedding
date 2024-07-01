@@ -5,6 +5,8 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\LayananController;
 use App\Http\Controllers\Admin\PaketController;
+use App\Http\Controllers\Admin\PenyewaanController;
+use App\Http\Controllers\Admin\Pem;
 use App\Http\Controllers\Admin\PesananController;
 use App\Http\Controllers\Admin\RiwayatController;
 use App\Http\Controllers\Auth\AutheticationController as Authentication;
@@ -93,9 +95,9 @@ Route::get('pesanan/tambah', [PesananController::class, 'create']);
 
 
 //Route Penyewaan
-
+Route::get('/penyewaan', [PenyewaanController::class, 'index'])->name('penyewaan');
 
 //Route Pembayaran
 
 //Route Riwayat
-Route::get('/riwayat', [RiwayatController::class, 'index']);
+Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
