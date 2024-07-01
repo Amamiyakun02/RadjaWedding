@@ -14,18 +14,18 @@ class DatabaseSeeder extends Seeder
     {
         // Panggil seeder lainnya di sini
         $this->call([
-//            UserSeeder::class, -> done
-//            BarangSeeder::class, -> done
-//            LayananSeeder::class, -> done
-//            BundleSeeder::class, -> done
-//            BundleBarangSeeder::class, -> done
-//            BundleLayananSeeder::class, -> done
-//            PenyewaanSeeder::class, -> done
-//            DetailPenyewaanSeeder::class, -> done
-//            BookingSeeder::class, -> done
-//            DetailBookingSeeder::class, -> done
+            UserSeeder::class,
+            BarangSeeder::class,
+            LayananSeeder::class,
+            BundleSeeder::class,
+            BundleBarangSeeder::class,
+            BundleLayananSeeder::class,
+            PenyewaanSeeder::class,
+            DetailPenyewaanSeeder::class,
+            BookingSeeder::class,
+            DetailBookingSeeder::class,
             PengembalianBarangSeeder::class,
-//            PembayaranSeeder::class, ->done
+            PembayaranSeeder::class,
 
         ]);
     }

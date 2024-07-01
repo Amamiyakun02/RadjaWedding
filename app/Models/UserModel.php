@@ -28,7 +28,7 @@ class UserModel extends Model
 
     public function bookings()
     {
-        return $this->hasMany(DetailBookingModel::class, 'UserID');
+        return $this->hasMany(BookingModel::class, 'UserID');
     }
 
     public function penyewaan()
@@ -40,3 +40,4 @@ class UserModel extends Model
         return $this->hasMany(PembayaranModel::class, 'UserID');
     }
 }
+// DONE 

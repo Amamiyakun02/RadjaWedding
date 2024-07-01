@@ -22,12 +22,12 @@ class PenyewaanModel extends Model
 
     public function user()
     {
-        return $this->belongsTo(UserModel::class);
+        return $this->belongsTo(UserModel::class, 'UserID');
     }
 
     public function rentalDetails()
     {
-        return $this->hasMany(DetailPenyewaanModel::class);
+        return $this->hasMany(DetailPenyewaanModel::class, 'RentalID');
     }
 
     public function bundleRental()
