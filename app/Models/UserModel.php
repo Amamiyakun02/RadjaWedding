@@ -17,6 +17,7 @@ class UserModel extends Model
         'username',
         'nama',
         'email',
+        'password',
         'telepon',
         'alamat',
         'jenis_pengguna',
@@ -34,7 +35,7 @@ class UserModel extends Model
     {
         return $this->hasMany(PenyewaanModel::class, 'UserID');
     }
-    public function payments()
+    public function pembayaran()
     {
         return $this->hasMany(PembayaranModel::class, 'UserID');
     }
