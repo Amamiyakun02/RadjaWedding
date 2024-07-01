@@ -35,9 +35,6 @@ class UserModel extends Model
     {
         return $this->hasMany(PenyewaanModel::class, 'UserID');
     }
-    public function pembayaran()
-    {
-        return $this->hasMany(PembayaranModel::class, 'UserID');
-    }
+
 }
 // DONE 

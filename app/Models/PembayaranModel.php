@@ -9,16 +9,21 @@ class PembayaranModel extends Model
 {
     use HasFactory;
     protected $table = 'pembayaran';protected $fillable = [
-        'UserID',
+        'rentalID',
+        'detailbookingID',
         'tanggal_pembayaran',
         'jumlah',
         'metode_pembayaran',
         'status',
     ];
 
-    public function user()
+    public function detail_booking()
     {
-        return $this->belongsTo(UserModel::class, 'UserID');
+        return $this->belongsTo(DetailBookingModel::class, 'detailbookingID');
+    }
+    public function penyewaan()
+    {
+        return $this->belongsTo(PenyewaanModel::class, 'rentalID');
     }
 
 

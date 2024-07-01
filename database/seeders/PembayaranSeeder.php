@@ -14,20 +14,39 @@ class PembayaranSeeder extends Seeder
      */
     public function run(): void
     {
-$faker = Faker::create();
-        $pelangganIds = DB::table('users')->where('jenis_pengguna', 'pelanggan')->pluck('id');
-        $selectedIds = $pelangganIds->shuffle();  // Acak ID pelanggan
-
-        // Ambil 12 pelanggan dengan 1 pembayaran
-        $singlePaymentIds = $selectedIds->splice(0, 12);
-        foreach ($singlePaymentIds as $userId) {
-            DB::table('pembayaran')->insert([
-                'UserID' => $userId,
-                'tanggal_pembayaran' => $faker->date(),
-                'jumlah' => $faker->randomFloat(2, 1000, 10000),  // Jumlah pembayaran antara 1000 dan 10000
-                'metode_pembayaran' => $faker->randomElement(['tunai', 'kartu_kredit', 'transfer_bank']),
-                'status' => $faker->randomElement(['dibayar', 'belum_dibayar']),
-            ]);
-        }
+       $data = [
+            [
+                'rentalID' => 1,
+                'detailbookingID' => 1,
+                'tanggal_pembayaran' => '2024-07-01',
+                'jumlah' => 500000.00,
+                'metode_pembayaran' => 'tunai',
+                'status' => 'dibayar',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'rentalID' => 2,
+                'detailbookingID' => 2,
+                'tanggal_pembayaran' => '2024-07-02',
+                'jumlah' => 750000.00,
+                'metode_pembayaran' => 'kartu_kredit',
+                'status' => 'belum_dibayar',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'rentalID' => 3,
+                'detailbookingID' => 3,
+                'tanggal_pembayaran' => '2024-07-03',
+                'jumlah' => 300000.00,
+                'metode_pembayaran' => 'transfer_bank',
+                'status' => 'dibayar',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            // Tambahkan lebih banyak data jika diperlukan
+        ];
+        DB::table('pembayaran')->insert($data);
     }
 }

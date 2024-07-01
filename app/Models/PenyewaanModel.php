@@ -35,4 +35,9 @@ class PenyewaanModel extends Model
         return $this->belongsTo(BundlePenyewaanModel::class, 'bundle_id');
     }
 
+    public function pembayaran()
+    {
+        return $this->hasOne(PembayaranModel::class, 'rentalID');
+    }
+
 }

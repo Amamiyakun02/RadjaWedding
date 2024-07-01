@@ -9,7 +9,8 @@ class LayananModel extends Model
 {
     use HasFactory;
     protected $table = 'layanan';
- protected $fillable = [
+
+    protected $fillable = [
         'nama',
         'deskripsi',
         'harga',
@@ -23,7 +24,7 @@ class LayananModel extends Model
 
     public function bundleLayanan()
     {
-        return $this->hasMany(BundleLayananModel::class, 'layananID');
+        return $this->hasOne(BundleLayananModel::class, 'layananID');
     }
 
 }

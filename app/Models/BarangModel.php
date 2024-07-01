@@ -36,6 +36,8 @@ class BarangModel extends Model
 
     public function bundleBarang()
     {
-        return $this->hasMany(BundleBarangModel::class, 'barang_id');
+        return $this->hasOne(BundleBarangModel::class, 'barang_id');
     }
 }
+
+// DONE
