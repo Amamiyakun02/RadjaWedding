@@ -34,11 +34,13 @@ class AutheticationController extends Controller
 
     }
 
-    public function reset_password()
+    public function forgot_password()
     {
         return view('Authentication.reset_password');
+
     }
-
-
+    public function reset_password()
+    {
+    }
 
 }
