@@ -10,8 +10,12 @@ use Illuminate\Http\Request;
 class BarangController extends Controller
 {
     public function index()
-    {
-        return view('Admin.Barang.index');
+    {      
+        $data = [
+           'title' => 'DAFTAR BARANG | RADJA WEDDING',
+        ];
+;
+        return view('Admin.Barang.index',$data);
     }
 
     public function create(){

@@ -36,7 +36,7 @@ class MainController extends Controller
     public function dashboard()
     {
         $data = [
-            'title' => 'Radja Wedding | Dashboard',
+            'title' => 'Dashboard | RADJA WEDDING',
         ];
         $dataBarang = ['fdfdfdfd'];
         return view('Content.Dashboard',$data, compact('dataBarang', 'data'));

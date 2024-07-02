@@ -67,7 +67,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/pengguna//delete/{id}', [PenggunaController::class, 'destroy']);
 
 //Routes Barang
-    Route::get('/barang/', [BarangController::class, 'index']);
+    Route::get('/barang', [BarangController::class, 'index']);
     Route::get('/barang/create', [BarangController::class, 'create']);
     Route::post('/barang', [BarangController::class, 'store']);
     Route::get('/barang/edit/{id}', [BarangController::class, 'edit']);
