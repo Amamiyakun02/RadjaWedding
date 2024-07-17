@@ -67,16 +67,16 @@ Route::prefix('admin')->group(function () {
     Route::delete('/pengguna//delete/{id}', [PenggunaController::class, 'destroy']);
 
 //Routes Barang
-    Route::get('/barang', [BarangController::class, 'index']);
+    Route::get('/barang', [BarangController::class, 'index'])->name('barang');
     Route::get('/barang/create', [BarangController::class, 'create']);
-    Route::post('/barang', [BarangController::class, 'store']);
+    Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
     Route::get('/barang/edit/{id}', [BarangController::class, 'edit']);
     Route::put('/barang/update/{id}', [BarangController::class, 'update']);
     Route::delete('/barang/delete/{id}', [BarangController::class, 'destroy']);
 
 //Routes Paket
     Route::get('/paket', [PaketController::class, 'index']);
-    Route::get('/paket/create', [PaketController::class, 'create']);
+    Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/paket', [PaketController::class, 'store']);
     Route::get('/paket/edit/{id}', [PaketController::class, 'edit']);
     Route::put('/paket/update/{id}', [PaketController::class, 'update']);
@@ -112,3 +112,9 @@ Route::prefix('customer')->group(function () {
     Route::get('/',[CustomerPenyewaanController::class,'index'])->name('customer');
 
 });
+
+
+Route::get('/layout', function () {
+    return view('Admin.Dashboard.index');
+});
+

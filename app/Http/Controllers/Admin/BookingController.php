@@ -11,12 +11,18 @@ class BookingController extends Controller
 {
     public function index()
     {
-
+        $data = [
+            'title' => 'PAKET PEMESANAN | RADJA WEDDING'
+        ];
+        return view('Admin.Paket.index', $data);
     }
 
     public function create()
     {
-
+        $data = [
+            'title' => 'TAMBAH PAKET PEMESANAN | RADJA WEDDING'
+        ];
+        return view('Admin.Paket.create', $data);
     }
 
     public function store(Request $request){

@@ -11,12 +11,20 @@ class PaketController extends Controller
 {
     public function index()
     {
-        return view('Admin.Paket.index');
+        $data = [
+            'title' => 'PAKET PEMESANAN | RADJA WEDDING'
+        ];
+        return view('Admin.Paket.index', $data);
     }
 
-    public function create(){
-        return view('Admin.Paket.create');
+    public function create()
+    {
+        $data = [
+            'title' => 'TAMBAH PAKET PEMESANAN | RADJA WEDDING'
+        ];
+        return view('Admin.Paket.create', $data);
     }
+
     public function store(Request $request){
 
     }

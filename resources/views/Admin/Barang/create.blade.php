@@ -41,9 +41,7 @@
                     </a>
                 </div>
             </li>
-
         </ul>
-
     </nav>
 <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -56,28 +54,36 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Form Tambah Barang</h6>
             </div>
-            <form action="/barang/" multiple="">
-
-
-                <div class="card-body">
-                    <div class="col">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" id="nama" class="form-control" aria-describedby="Nama" name="nama" placeholder="Nama Barang">
+            <form action="{{ route('barang.store') }}" method="POST">
+                @csrf
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
+                            <textarea id="deskripsi" class="form-control" name="deskripsi" placeholder="Deskripsi" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="harga" class="form-label">Harga</label>
+                            <input type="number" id="harga" class="form-control" name="harga" placeholder="Harga" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stok" class="form-label">Stok</label>
+                            <input type="number" id="stok" class="form-control" name="stok" placeholder="Stok" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kategori" class="form-label">Kategori</label>
+                            <input type="text" id="kategori" class="form-control" name="kategori" placeholder="Kategori" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="url_gambar" class="form-label">URL Gambar</label>
+                            <input type="text" id="url_gambar" class="form-control" name="url_gambar" placeholder="URL Gambar" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
                     </div>
-                    <div class="col">
-                        <label for="Deskripsi" class="form-label">Deskripsi</label>
-                        <input type="text" id="Deskripsi" class="form-control" aria-describedby="Deskripsi" name="Deskripsi" placeholder="Deskripsi Barang">
-                    </div>
-                    <div class="col">
-                        <label for="Jumlah" class="form-label">Jumlah</label>
-                        <input type="text" id="Jumlah" class="form-control" aria-describedby="Jumlah" name="Jumlah" placeholder="Jumlah Barang">
-                    </div>
-                    <div class="col">
-                        <label for="nama" class="form-label">Harga</label>
-                        <input type="text" id="Harga" class="form-control" aria-describedby="Harga" name="Harga" placeholder="Harga Barang">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    <button type="submit" class="btn btn-primary">Reset</button>
                 </div>
             </form>
         </div>
