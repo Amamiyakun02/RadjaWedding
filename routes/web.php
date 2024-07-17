@@ -39,10 +39,10 @@ Route::get('/',[MainController::class,'index']);
 //Route Authentikasi
 //Route Login
 Route::get('/login', [Authentication::class, 'login_user'])->name('login');
-Route::post('/login', [Authentication::class, 'login'])->name('login_post');
+Route::post('/login', [Authentication::class, 'login'])->name('login.post');
 //Route Register
 Route::get('/register', [Authentication::class, 'register_user'])->name('register');
-Route::post('/register', [Authentication::class, 'register'])->name('register_post');
+Route::post('/register', [Authentication::class, 'register'])->name('register.post');
 //Route Reset Password
 Route::get('/reset_password', [Authentication::class, 'forgot_password'])->name('forgot_password');
 Route::post('/reset_password', [Authentication::class, 'reset_password'])->name('reset_password');
@@ -68,27 +68,27 @@ Route::prefix('admin')->group(function () {
 
 //Routes Barang
     Route::get('/barang', [BarangController::class, 'index'])->name('barang');
-    Route::get('/barang/create', [BarangController::class, 'create']);
+    Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
     Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
-    Route::get('/barang/edit/{id}', [BarangController::class, 'edit']);
-    Route::put('/barang/update/{id}', [BarangController::class, 'update']);
-    Route::delete('/barang/delete/{id}', [BarangController::class, 'destroy']);
+    Route::get('/barang/edit/{id}', [BarangController::class, 'edit'])->name('barang.edit');
+    Route::put('/barang/update/{id}', [BarangController::class, 'update'])->name('barang.update');
+    Route::delete('/barang/delete/{id}', [BarangController::class, 'destroy'])->name('barang.delete');
 
 //Routes Paket
     Route::get('/paket', [PaketController::class, 'index']);
     Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
-    Route::post('/paket', [PaketController::class, 'store']);
-    Route::get('/paket/edit/{id}', [PaketController::class, 'edit']);
-    Route::put('/paket/update/{id}', [PaketController::class, 'update']);
-    Route::delete('/paket/delete/{id}', [PaketController::class, 'destroy']);
+    Route::post('/paket', [PaketController::class, 'store'])->name('paket.store');
+    Route::get('/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
+    Route::put('/paket/update/{id}', [PaketController::class, 'update'])->name('paket.update');
+    Route::delete('/paket/delete/{id}', [PaketController::class, 'destroy'])->name('paket.delete');
 
 //Routes Layanan
-    Route::get('/layanan', [LayananController::class, 'index']);
-    Route::get('/layanan/create', [LayananController::class, 'create']);
-    Route::post('/layanan', [LayananController::class, 'store']);
-    Route::get('/layanan/edit/{id}', [LayananController::class, 'edit']);
-    Route::put('/layanan/update/{id}', [LayananController::class, 'update']);
-    Route::delete('/layanan/delete/{id}', [LayananController::class, 'destroy']);
+    Route::get('/layanan', [LayananController::class, 'index'])->name('layanana');
+    Route::get('/layanan/create', [LayananController::class, 'create'])->name('layanan.create');
+    Route::post('/layanan', [LayananController::class, 'store'])->name('layanan.store');
+    Route::get('/layanan/edit/{id}', [LayananController::class, 'edit'])->name('layanan.edit');
+    Route::put('/layanan/update/{id}', [LayananController::class, 'update'])->name('layanan.update');
+    Route::delete('/layanan/delete/{id}', [LayananController::class, 'destroy'])->name('layanan.delete');
 
 
 //Route Booking

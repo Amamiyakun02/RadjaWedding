@@ -9,12 +9,20 @@ use Illuminate\Http\Request;
 
 class LayananController extends Controller
 {
-    public function index(){
-        return view('Admin.Layanan.index');
+        public function index()
+    {
+        $data = [
+            'title' => 'DATA LAYANAN | RADJA WEDDING'
+        ];
+        return view('Admin.Layanan.index', $data);
     }
+
     public function create()
     {
-
+    $data = [
+            'title' => 'TAMBAH LAYANAN | RADJA WEDDING'
+        ];
+        return view('Admin.Layanan.create', $data);
     }
 
     public function store(Request $request){

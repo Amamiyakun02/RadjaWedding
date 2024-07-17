@@ -46,7 +46,7 @@ class AutheticationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+//            redirect($validator->errors(), 422);
         }
 
         $user = UserModel::create([
