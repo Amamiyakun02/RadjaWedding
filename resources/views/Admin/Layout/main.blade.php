@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <title>{{ $title }}</title>
     <!-- Custom CSS -->
     <link href="{{ asset('Assets/assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('Assets/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
@@ -274,7 +274,7 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+                                    <li class="breadcrumb-item"><a href="index.html"> {{ $breadcrumb }}</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -332,7 +332,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="{{ asset('Assets/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('Assets/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('Assets/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
     <script src="{{ asset('Assets/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- apps -->

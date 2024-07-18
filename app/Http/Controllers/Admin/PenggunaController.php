@@ -10,9 +10,20 @@ use Illuminate\Support\Facades\Validator;
 
 class PenggunaController extends Controller
 {
+    private UserModel $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
     public function index()
     {
-
+        $data = [
+            'title' => 'Data Pengguna | RADJA WEDDING',
+            'breadcrumb' => 'Pengguna'
+        ];
+        $users = $this->userModel->paginate(10);
+        return view('Admin.Pengguna.index', $data, compact('users'));
     }
 
     public function create()

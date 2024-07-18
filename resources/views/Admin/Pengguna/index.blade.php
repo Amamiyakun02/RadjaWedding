@@ -1,65 +1,53 @@
-@extends('Layouts.layout')
+
+@extends('Admin.Layout.main')
 
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Table Data</h4>
 
-  <h1>Form Input Pengguna</h1>
-
-  <form action="#" method="post">
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="bg-info text-white">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Username</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Alamat</th>
+                                    <th>Jenis Pengguna</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Tanggal Lahir</th>
+                                </tr>
+                            </thead>
+{{--                            @php($a = 0);--}}
+                            <tbody>
+                                @foreach ($users as $index => $user)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $user->username }}</td>
+                                    <td>{{ $user->nama }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->telepon }}</td>
+                                    <td>{{ $user->alamat }}</td>
+                                    <td>{{ $user->jenis_pengguna }}</td>
+                                    <td>{{ $user->jenis_kelamin }}</td>
+                                    <td>{{ $user->tanggal_lahir }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                {{ $users->links() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-      <label for="nama">Nama Lengkap:</label>
-      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan alamat email" required>
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
-    </div>
-
-    <div class="form-group">
-      <label for="telepon">Nomor Telepon:</label>
-      <input type="tel" class="form-control" id="telepon" name="telepon" placeholder="Masukkan nomor telepon">
-    </div>
-
-    <div class="form-group">
-      <label for="alamat">Alamat:</label>
-      <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="jenis_pengguna">Jenis Pengguna:</label>
-      <select class="form-control" id="jenis_pengguna" name="jenis_pengguna">
-        <option value="admin">Admin</option>
-        <option value="user">User</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="jenis_kelamin">Jenis Kelamin:</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" id="laki-laki" name="jenis_kelamin" value="laki-laki" checked>
-        <label class="form-check-label" for="laki-laki">Laki-laki</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" id="perempuan" name="jenis_kelamin" value="perempuan">
-        <label class="form-check-label" for="perempuan">Perempuan</label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="tanggal_lahir">Tanggal Lahir:</label>
-      <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
 @endsection
