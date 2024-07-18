@@ -59,12 +59,12 @@ Route::get('/customers/', function () {
 
 Route::prefix('admin')->group(function () {
 //Route Pengguna
-    Route::get('/pengguna', [PenggunaController::class, 'index']);
-    Route::get('/pengguna/create', [PenggunaController::class, 'create']);
-    Route::post('/pengguna/create', [PenggunaController::class, 'store']);
-    Route::get('/pengguna//edit/{id}', [PenggunaController::class, 'edit']);
-    Route::put('/pengguna/edit/{id}', [PenggunaController::class, 'update']);
-    Route::delete('/pengguna//delete/{id}', [PenggunaController::class, 'destroy']);
+    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
+    Route::get('/pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create');
+    Route::post('/pengguna/create', [PenggunaController::class, 'store'])->name('pengguna.store');
+    Route::get('/pengguna//edit/{id}', [PenggunaController::class, 'edit'])->name('pengguna.edit');
+    Route::put('/pengguna/edit/{id}', [PenggunaController::class, 'update'])->name('pengguna.update');
+    Route::delete('/pengguna//delete/{id}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
 
 //Routes Barang
     Route::get('/barang', [BarangController::class, 'index'])->name('barang');
@@ -115,6 +115,10 @@ Route::prefix('customer')->group(function () {
 
 
 Route::get('/layout', function () {
-    return view('Admin.Dashboard.index');
+    $data = [
+        'title' => 'Home',
+        'breadcrumb' => 'Home',
+    ];
+    return view('Admin.Dashboard.index', $data);
 });
 

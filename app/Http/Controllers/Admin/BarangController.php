@@ -14,6 +14,7 @@ class BarangController extends Controller
     {
         $data = [
            'title' => 'DAFTAR BARANG | RADJA WEDDING',
+            'breadcrumb' => 'Daftar Barang',
         ];
         return view('Admin.Barang.index',$data);
     }

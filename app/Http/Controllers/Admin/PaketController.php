@@ -12,7 +12,8 @@ class PaketController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'PAKET PEMESANAN | RADJA WEDDING'
+            'title' => 'PAKET PEMESANAN | RADJA WEDDING',
+            'breadcrumb' => "Paket Pemesanan",
         ];
         return view('Admin.Paket.index', $data);
     }
