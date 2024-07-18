@@ -46,18 +46,22 @@ Route::post('/register', [Authentication::class, 'register'])->name('register.po
 //Route Reset Password
 Route::get('/reset_password', [Authentication::class, 'forgot_password'])->name('forgot_password');
 Route::post('/reset_password', [Authentication::class, 'reset_password'])->name('reset_password');
-
-
-Route::get('/dashboard', function () {
-    return view('Content.Dashboard');
-});
-Route::get('/dashboard', [MainController::class, 'dashboard'])->name('dashboard');
+//Route Logout
+Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 
 Route::get('/customers/', function () {
     return view('Customers.Content.landing-page');
 });
 
 Route::prefix('admin')->group(function () {
+//    Admin Dashboard
+    Route::get('/dashboard', function () {
+    $data = [
+        'title' => 'Dashboard',
+        'breadcrumb' => 'Dashboard',
+    ];
+    return view('Admin.Dashboard.index', $data);
+})->name('admin.dashboard');
 //Route Pengguna
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
     Route::get('/pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create');
@@ -72,10 +76,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
     Route::get('/barang/edit/{id}', [BarangController::class, 'edit'])->name('barang.edit');
     Route::put('/barang/update/{id}', [BarangController::class, 'update'])->name('barang.update');
-    Route::delete('/barang/delete/{id}', [BarangController::class, 'destroy'])->name('barang.delete');
+    Route::delete('/barang/delete/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
 
 //Routes Paket
-    Route::get('/paket', [PaketController::class, 'index']);
+    Route::get('/paket', [PaketController::class, 'index'])->name('paket');
     Route::get('/paket/create', [PaketController::class, 'create'])->name('paket.create');
     Route::post('/paket', [PaketController::class, 'store'])->name('paket.store');
     Route::get('/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
@@ -83,7 +87,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/paket/delete/{id}', [PaketController::class, 'destroy'])->name('paket.delete');
 
 //Routes Layanan
-    Route::get('/layanan', [LayananController::class, 'index'])->name('layanana');
+    Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
     Route::get('/layanan/create', [LayananController::class, 'create'])->name('layanan.create');
     Route::post('/layanan', [LayananController::class, 'store'])->name('layanan.store');
     Route::get('/layanan/edit/{id}', [LayananController::class, 'edit'])->name('layanan.edit');
@@ -114,7 +118,7 @@ Route::prefix('customer')->group(function () {
 });
 
 
-Route::get('/layout', function () {
+Route::get('/', function () {
     $data = [
         'title' => 'Home',
         'breadcrumb' => 'Home',

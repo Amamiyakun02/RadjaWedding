@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class AutheticationController extends Controller
 {
+    protected UserModel $user;
     public function __construct()
     {
-    $this->user = new UserModel();
+//        $this->middleware('auth')->except('logout');
+        $this->user = new UserModel();
     }
 
     public function login_user(): View
@@ -40,28 +43,35 @@ class AutheticationController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'telepon' => 'nullable|string|max:15',
             'alamat' => 'nullable|string|max:255',
-            'jenis_pengguna' => 'required|string|max:255',
             'jenis_kelamin' => 'nullable|string|max:10',
             'tanggal_lahir' => 'nullable|date',
         ]);
 
-        if ($validator->fails()) {
-//            redirect($validator->errors(), 422);
+//        if ($validator->fails()) {
+//            return redirect()->back()->withErrors($validator)->withInput();
+//        }
+        dd($request->all());
+        DB::beginTransaction();
+        try {
+            $data = $this->user->create([
+                'username' => $request->username,
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'telepon' => $request->telepon,
+                'alamat' => $request->alamat,
+                'jenis_pengguna' => 'pelanggan',
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tanggal_lahir' => $request->tanggal_lahir,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('login')->with('success', 'User registered successfully, please login.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Registration failed, please try again.')->withInput();
         }
-
-        $user = UserModel::create([
-            'username' => $request->username,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'telepon' => $request->telepon,
-            'alamat' => $request->alamat,
-            'jenis_pengguna' => $request->jenis_pengguna,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tanggal_lahir' => $request->tanggal_lahir,
-        ]);
-
-        return view('Authentication.login');
     }
 
     public function forgot_password()
@@ -74,4 +84,14 @@ class AutheticationController extends Controller
 
     }
 
+    public function logout()
+    {
+//        Auth::logout();
+//
+//        $request->session()->invalidate();
+//
+//        $request->session()->regenerateToken();
+
+        return redirect(route('register'));
+    }
 }

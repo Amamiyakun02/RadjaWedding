@@ -10,13 +10,19 @@ use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
+    private BarangModel $barangModel;
+    public function __construct()
+    {
+        $this->barangModel = new BarangModel();
+    }
     public function index()
     {
         $data = [
            'title' => 'DAFTAR BARANG | RADJA WEDDING',
             'breadcrumb' => 'Daftar Barang',
         ];
-        return view('Admin.Barang.index',$data);
+        $produk = $this->barangModel->paginate(10);
+        return view('Admin.Barang.index',$data, compact('produk'));
     }
 
     public function create(){

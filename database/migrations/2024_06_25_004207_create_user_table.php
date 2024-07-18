@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('telepon', 15)->nullable();
             $table->text('alamat')->nullable();
-            $table->enum('jenis_pengguna', ['pelanggan', 'admin'])->default('pelanggan');
+            $table->enum('jenis_pengguna', ['pelanggan','vip','admin'])->default('pelanggan');
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->timestamps();

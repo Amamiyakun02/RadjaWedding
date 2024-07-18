@@ -11,11 +11,10 @@
                         <table class="table">
                             <thead class="bg-info text-white">
                                 <tr>
-                                    <th>No</th>
-                                    <th>Username</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Telepon</th>
+                                    <th>Pengguna</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Alamat Email</th>
+                                    <th>Nomor Telepon</th>
                                     <th>Alamat</th>
                                     <th>Jenis Pengguna</th>
                                     <th>Jenis Kelamin</th>
@@ -23,11 +22,9 @@
                                     <th></th>
                                 </tr>
                             </thead>
-{{--                            @php($a = 0);--}}
                             <tbody>
-                                @foreach ($users as $index => $user)
+                                @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->nama }}</td>
                                     <td>{{ $user->email }}</td>

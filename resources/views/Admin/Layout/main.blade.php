@@ -176,19 +176,19 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
-                        <li class="nav-item d-none d-md-block">
-                            <a class="nav-link" href="javascript:void(0)">
-                                <div class="customize-input">
-                                    <select
-                                        class="custom-select form-control bg-white custom-radius custom-shadow border-0">
-                                        <option selected>EN</option>
-                                        <option value="1">AB</option>
-                                        <option value="2">AK</option>
-                                        <option value="3">BE</option>
-                                    </select>
-                                </div>
-                            </a>
-                        </li>
+{{--                        <li class="nav-item d-none d-md-block">--}}
+{{--                            <a class="nav-link" href="javascript:void(0)">--}}
+{{--                                <div class="customize-input">--}}
+{{--                                    <select--}}
+{{--                                        class="custom-select form-control bg-white custom-radius custom-shadow border-0">--}}
+{{--                                        <option selected>EN</option>--}}
+{{--                                        <option value="1">AB</option>--}}
+{{--                                        <option value="2">AK</option>--}}
+{{--                                        <option value="3">BE</option>--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -270,11 +270,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning Jason!</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Selamat Datang, Admin!</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html"> {{ $breadcrumb }}</a>
+                                    <li class="breadcrumb-item"><a href="#"> {{ $breadcrumb }}</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -282,11 +282,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-right">
-                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 19</option>
-                                <option value="1">July 19</option>
-                                <option value="2">Jun 19</option>
-                            </select>
+                            <div id="dateSelect" class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+{{--                                <option selected>Aug 19</option>--}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -351,5 +349,18 @@
     <script src="{{ asset('Assets/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('Assets/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('Assets/js/pages/dashboards/dashboard1.min.js') }}"></script>
+    <script>
+        var today = new Date();
+        // Daftar nama bulan dalam bahasa Inggris
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        // Mendapatkan bulan dan tanggal
+        var month = months[today.getMonth()]; // Menggunakan index bulan dari 0 hingga 11
+        var date = today.getDate();
+
+        // Menampilkan hasilnya di dalam elemen div
+        document.getElementById("dateSelect").innerText = month + " " + date;
+
+    </script>
 </body>
 </html>

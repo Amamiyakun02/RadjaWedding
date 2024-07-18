@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('Assets/assets/images/favicon.png') }}">
-    <title>REGISTRASI PENGGUNA | RADJA WEDDING</title>
+    <title>REGISTRASI | RADJA WEDDING</title>
     <!-- Custom CSS -->
     <link href="{{ asset('Assets/css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn btn-block btn-dark"></button>
+                                    <button type="submit" class="btn btn-block btn-dark">Registrasi</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
                                     Already have an account? <a href="{{ route('login') }}" class="text-danger">Sign In</a>

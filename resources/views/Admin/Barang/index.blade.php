@@ -11,36 +11,31 @@
                         <table class="table">
                             <thead class="bg-info text-white">
                                 <tr>
-                                    <th>No</th>
-                                    <th>Username</th>
                                     <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Telepon</th>
-                                    <th>Alamat</th>
-                                    <th>Jenis Pengguna</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th></th>
+                                    <th>Deskripsi</th>
+                                    <th>Harga</th>
+                                    <th>Stok</th>
+                                    <th>Kategori</th>
+                                    <th>Gambar</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-{{--                            @php($a = 0);--}}
                             <tbody>
-                                @foreach ($users as $index => $user)
+                                @foreach($produk as $barang)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $user->username }}</td>
-                                    <td>{{ $user->nama }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->telepon }}</td>
-                                    <td>{{ $user->alamat }}</td>
-                                    <td>{{ $user->jenis_pengguna }}</td>
-                                    <td>{{ $user->jenis_kelamin }}</td>
-                                    <td>{{ $user->tanggal_lahir }}</td>
+                                    <td>{{ $barang->nama }}</td>
+                                    <td>{{ $barang->deskripsi }}</td>
+                                    <td>{{ $barang->harga }}</td>
+                                    <td>{{ $barang->stok }}</td>
+                                    <td>{{ $barang->kategori }}</td>
                                     <td>
-                                       <a href="{{ route('pengguna.edit', $user->id) }}" class="btn btn-info btn-circle">
+                                        <img style="width: 100px; height: 100px;" src="{{ asset($barang->url_gambar) }}" alt="">
+                                    </td>
+                                    <td>
+                                       <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-info btn-circle">
                                                 <i class="fas fa-info-circle"></i>
                                         </a>
-                                        <form action="{{ route('pengguna.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('barang.destroy', $barang->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure?')">
@@ -54,7 +49,7 @@
                         </table>
                         <div class="col-12">
                             <div class="d-flex justify-content-center">
-                                {{ $users->links('pagination.custom') }}
+                                {{ $produk->links('pagination.custom') }}
                             </div>
                         </div>
                     </div>
