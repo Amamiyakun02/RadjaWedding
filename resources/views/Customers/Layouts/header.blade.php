@@ -13,10 +13,12 @@
           <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
 {{--              <li><a href="#">Drop Down 1</a></li>--}}
-              <li class="dropdown"><a href="#"><span>Jasa</span> <i class="bi bi-chevron-right"></i></a>
+              <li class="dropdown"><a href="#"><span>Layanan & Jasa</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Jasa 1</a></li>
-                  <li><a href="#">Jasa 2</a></li>
+                  <li><a href="#">Tata Rias & Make Up</a></li>
+                  <li><a href="#">Penyewaan Dekorasi & Pelaminan</a></li>
+                  <li><a href="#">Penyewaan Gaun Pernikahan</a></li>
+                  <li><a href="#">Hair Rebonding</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Barang</span> <i class="bi bi-chevron-right"></i></a>

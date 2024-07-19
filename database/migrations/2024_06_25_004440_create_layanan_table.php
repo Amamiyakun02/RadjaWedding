@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 100);
             $table->text('deskripsi')->nullable();
-            $table->decimal('harga', 10, 2);
             $table->string('url_gambar', 255)->nullable();
             $table->timestamps();
         });

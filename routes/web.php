@@ -72,6 +72,7 @@ Route::prefix('admin')->group(function () {
 
 //Routes Barang
     Route::get('/barang', [BarangController::class, 'index'])->name('barang');
+    Route::get('/barang/stock', [BarangController::class, 'stock'])->name('barang.stock');
     Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');
     Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
     Route::get('/barang/edit/{id}', [BarangController::class, 'edit'])->name('barang.edit');
@@ -96,15 +97,16 @@ Route::prefix('admin')->group(function () {
 
 
 //Route Booking
-    Route::get('/pesanan', [PesananController::class, 'index']);
-    Route::get('pesanan/tambah', [PesananController::class, 'create']);
+    Route::get('/pesanan', [PesananController::class, 'index'])->name('booking');
+    Route::get('pesanan/tambah', [PesananController::class, 'create'])->name('booking.create');
 
 
 //Route Penyewaan
     Route::get('/penyewaan', [PenyewaanController::class, 'index'])->name('penyewaan');
 
 //Route Pembayaran
-
+    Route::get('/pembayaran', [PenyewaanController::class, 'create'])->name('pembayaran');
+    Route::get('/pembayaran/create', [PenyewaanController::class, 'create'])->name('pembayaran.create');
 //Route Riwayat
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
 });
@@ -112,7 +114,6 @@ Route::prefix('admin')->group(function () {
 //Routes Customer
 Route::prefix('customer')->group(function () {
     Route::get('/',[CustomerBookingController::class,'index'])->name('customer');
-
     Route::get('/',[CustomerPenyewaanController::class,'index'])->name('customer');
 
 });

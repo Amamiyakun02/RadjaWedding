@@ -26,7 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('Assets-Customers/css/style.css') }}" rel="stylesheet">
-    <title>{{$title}}</title>
+    <title>RADJA Wedding</title>
 
     <!-- =======================================================
     * Template Name: Vlava

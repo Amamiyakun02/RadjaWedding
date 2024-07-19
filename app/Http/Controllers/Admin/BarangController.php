@@ -69,4 +69,8 @@ class BarangController extends Controller
     public function destroy($id){
 
     }
+
+    public function stock(){
+        return "hello";
+    }
 }

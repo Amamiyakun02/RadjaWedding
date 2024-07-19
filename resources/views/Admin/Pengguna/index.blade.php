@@ -1,4 +1,3 @@
-
 @extends('Admin.Layout.main')
 
 @section('content')

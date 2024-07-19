@@ -12,7 +12,8 @@ class BookingController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'PAKET PEMESANAN | RADJA WEDDING'
+            'title' => 'PAKET PEMESANAN | RADJA WEDDING',
+            'breadcrumb' => 'Paket Pemesanan',
         ];
         return view('Admin.Paket.index', $data);
     }
@@ -20,7 +21,8 @@ class BookingController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'TAMBAH PAKET PEMESANAN | RADJA WEDDING'
+            'title' => 'TAMBAH PAKET PEMESANAN | RADJA WEDDING',
+            'breadcrumb' => 'Tambah Paket Pemesanan',
         ];
         return view('Admin.Paket.create', $data);
     }

@@ -28,7 +28,11 @@ class PenggunaController extends Controller
 
     public function create()
     {
-
+        $data = [
+            'title' => 'Tambah Data Pengguna | RADJA WEDDING',
+            'breadcrumb' => 'Tambah Data Pengguna',
+        ];
+        return view('Admin.Pengguna.create', $data);
     }
 
     public function store(Request $request){
