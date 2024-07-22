@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
+use App\Models\BundleBarangModel;
+use App\Models\DetailPenyewaanModel;
+use App\Models\PengembalianBarangModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

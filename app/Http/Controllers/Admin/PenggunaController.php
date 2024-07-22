@@ -89,7 +89,12 @@ class PenggunaController extends Controller
     }
 
     public function show($id){
+        $userData = $this->userModel->find($id);
 
+        if($userData) {
+            return response()->json($userData, 200);
+        }
+        return response()->json(['error' => 'Data Pengguna tidak ditemukan'], 404);
     }
 
 

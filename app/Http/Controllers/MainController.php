@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\UserModel;
-use App\Models\LayananModel;
-use App\Models\BarangModel;
 use App\Models\BundlePenyewaanModel;
+use App\Models\LayananModel;
+use App\Models\UserModel;
 
 class MainController extends Controller
 {

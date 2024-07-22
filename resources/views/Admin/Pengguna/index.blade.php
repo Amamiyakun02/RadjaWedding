@@ -10,6 +10,7 @@
                         <table class="table">
                             <thead class="bg-info text-white">
                                 <tr>
+                                    <th>No</th>
                                     <th>Pengguna</th>
                                     <th>Nama Lengkap</th>
                                     <th>Alamat Email</th>
@@ -22,8 +23,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($users as $no => $user)
                                 <tr>
+                                    <td>{{ $no + 1}}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->nama }}</td>
                                     <td>{{ $user->email }}</td>
