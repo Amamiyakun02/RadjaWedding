@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\BarangModel;
 use App\Http\Controllers\Controller;
+use App\Models\BarangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

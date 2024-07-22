@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangModel;
 use App\Models\BundlePenyewaanModel;
 use App\Models\LayananModel;
 use App\Models\UserModel;
