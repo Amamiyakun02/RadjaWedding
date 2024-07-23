@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class LayananModel extends Model
 {
     use HasFactory;
+    protected $column_order = ['id']; // Kolom yang bisa diurutkan
+    protected $column_search = [
+        'nama',
+        'deskripsi',
+    ];
+    protected $order = ['id' => 'desc']; // Default order
+    protected $request;
+    protected $db;
+    protected $dt;
+
     protected $table = 'layanan';
 
     protected $fillable = [

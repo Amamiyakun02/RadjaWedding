@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('kategori', 50)->nullable();
             $table->string('url_gambar', 255)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
