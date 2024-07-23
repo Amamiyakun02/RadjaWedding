@@ -4,21 +4,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Http\Request;
 class UserModel extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'users'; // Nama tabel sesuai dengan skema
     protected $column_order = ['id']; // Kolom yang bisa diurutkan
     protected $column_search = ['username', 'nama', 'email', 'password', 'telepon', 'alamat', 'jenis_pengguna', 'jenis_kelamin', 'tanggal_lahir']; // Kolom yang bisa dicari
     protected $order = ['id' => 'desc']; // Default order
     protected $request;
     protected $db;
     protected $dt;
+    protected $table = 'users'; // Nama tabel sesuai dengan skema
 
     protected $fillable = [
         'username',
@@ -41,7 +41,6 @@ class UserModel extends Authenticatable
     {
         return $this->hasMany(PenyewaanModel::class, 'UserID');
     }
-
     public function __construct(array $attributes = [], Request $request = null)
     {
         parent::__construct($attributes);
@@ -109,3 +108,4 @@ class UserModel extends Authenticatable
         return $this->count();
     }
 }
+// DONE
