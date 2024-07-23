@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Api User
-Route::apiResource('/users', 'App\Http\Controllers\API\UserController');
+Route::apiResource('/users', PenggunaController::class)->except(['index']);
+Route::post('users/index', [PenggunaController::class, 'index']);

@@ -8,10 +8,45 @@ use App\Models\UserModel;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index($request)
     {
-        return response()->json(UserModel::all(), 200);
+    $userModel = new UserModel();
+
+        if ($request->isMethod('post')) {
+            $lists = $userModel->getDatatables($request);
+            $data = [];
+            $no = $request->input('start');
+
+            foreach ($lists as $list) {
+                $no++;
+                $row = [];
+                $row[] = $no;
+                $row[] = $list->nama;
+                $row[] = $list->email;
+                $row[] = $list->telepon;
+                $row[] = $list->alamat;
+                $row[] = $list->jenis_pengguna;
+                $row[] = $list->jenis_kelamin;
+                $row[] = $list->tanggal_lahir;
+                $row[] = '
+                <button onClick="editLayanan(' . htmlspecialchars(json_encode($list), ENT_QUOTES, 'UTF-8') . ')" class="bg-primary focus:outline-none hover:bg-blue-700 text-white font-bold px-2 py-1 rounded">Edit</button>
+                <button onClick="deleteLayanan(' . $list->id . ')" class="bg-danger mt-2 focus:outline-none hover:bg-red-700 text-white font-bold px-2 py-1  rounded">Hapus</button>';
+                $data[] = $row;
+            }
+
+            $output = [
+                'draw' => $request->input('draw'),
+                'recordsTotal' => $userModel->countAll(),
+                'recordsFiltered' => $userModel->countFiltered($request),
+                'data' => $data,
+            ];
+
+            return response()->json($output);
+        }
     }
+
+
+
 
     public function store(Request $request)
     {
