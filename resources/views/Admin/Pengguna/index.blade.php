@@ -1,63 +1,63 @@
 @extends('Admin.Layout.main')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Table Data</h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="bg-info text-white">
+<div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Pengguna
+                    </div>
+                    <div class="card-body">
+                        <table id="user-table" class="table table-striped table-bordered table-hover w-100">
+                            <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Pengguna</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Alamat Email</th>
-                                    <th>Nomor Telepon</th>
-                                    <th>Alamat</th>
-                                    <th>Jenis Pengguna</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th></th>
+                                    <td>No</td>
+                                    <td>Nama</td>
+                                    <td>Email</td>
+                                    <td>Telepon</td>
+                                    <td>Alamat</td>
+                                    <td>Tipe</td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>Tanggal Lahir</td>
+                                    <td>Aksi</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $no => $user)
-                                <tr>
-                                    <td>{{ $no + 1}}</td>
-                                    <td>{{ $user->username }}</td>
-                                    <td>{{ $user->nama }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->telepon }}</td>
-                                    <td>{{ $user->alamat }}</td>
-                                    <td>{{ $user->jenis_pengguna }}</td>
-                                    <td>{{ $user->jenis_kelamin }}</td>
-                                    <td>{{ $user->tanggal_lahir }}</td>
-                                    <td>
-                                       <a href="{{ route('pengguna.edit', $user->id) }}" class="btn btn-info btn-circle">
-                                                <i class="fas fa-info-circle"></i>
-                                        </a>
-                                        <form action="{{ route('pengguna.destroy', $user->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
                             </tbody>
                         </table>
-                        <div class="col-12">
-                            <div class="d-flex justify-content-center">
-                                {{ $users->links('pagination.custom') }}
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var table = $('#user-table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "order": [],
+        "ajax": {
+            "url": "{{ url('api/users')}}",
+            "type": "POST"
+        },
+        "columnDefs": [{
+            "targets": [],
+            "orderable": false,
+        }, ],
+    });
+});
+</script>
 @endsection

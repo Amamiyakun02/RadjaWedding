@@ -1,7 +1,37 @@
-
 @extends('Admin.Layout.main')
 
 @section('content')
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Daftar Barang
+            </h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="#"> {{ $breadcrumb }}</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="col-5 align-self-center">
+            <div class="customize-input float-right">
+                <div id="dateSelect"
+                    class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                    {{--                                <option selected>Aug 19</option>--}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -29,16 +59,20 @@
                                     <td>{{ $barang->stok }}</td>
                                     <td>{{ $barang->kategori }}</td>
                                     <td>
-                                        <img style="width: 100px; height: 100px;" src="{{ asset($barang->url_gambar) }}" alt="">
+                                        <img style="width: 100px; height: 100px;" src="{{ asset($barang->url_gambar) }}"
+                                            alt="">
                                     </td>
                                     <td>
-                                       <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-info btn-circle">
-                                                <i class="fas fa-info-circle"></i>
+                                        <a href="{{ route('barang.edit', $barang->id) }}"
+                                            class="btn btn-info btn-circle">
+                                            <i class="fas fa-info-circle"></i>
                                         </a>
-                                        <form action="{{ route('barang.destroy', $barang->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('barang.destroy', $barang->id) }}" method="POST"
+                                            style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure?')">
+                                            <button type="submit" class="btn btn-danger btn-circle"
+                                                onclick="return confirm('Are you sure?')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
@@ -57,4 +91,4 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection
