@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
-    public function index($request)
+    public function index(Request $request)
     {
         $userModel = new UserModel();
 
@@ -30,8 +30,7 @@ class UserController extends Controller
                 $row[] = $list->jenis_kelamin;
                 $row[] = $list->tanggal_lahir;
                 $row[] = '
-                <button onClick="editLayanan(' . htmlspecialchars(json_encode($list), ENT_QUOTES, 'UTF-8') . ')" class="bg-primary focus:outline-none hover:bg-blue-700 text-white font-bold px-2 py-1 rounded">Edit</button>
-                <button onClick="deleteLayanan(' . $list->id . ')" class="bg-danger mt-2 focus:outline-none hover:bg-red-700 text-white font-bold px-2 py-1  rounded">Hapus</button>';
+                <button onClick="editPengguna(' . $list->id . ')" class="btn btn-primary rounded"><i class="fas fa-pencil-alt"></i></button>';
                 $data[] = $row;
             }
 
@@ -67,6 +66,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        return response()->json($request->all(), 200);
         $validated = $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'description' => 'nullable|string',

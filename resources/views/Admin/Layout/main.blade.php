@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>{{ $title }}</title>
     <!-- Custom CSS -->
+
     <link href="{{ asset('Assets/assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('Assets/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('Assets/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
