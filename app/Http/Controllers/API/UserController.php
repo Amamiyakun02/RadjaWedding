@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
@@ -41,12 +42,9 @@ class UserController extends Controller
                 'data' => $data,
             ];
 
-            return response()->json($output);
+            return Response::json($output);
         }
     }
-
-
-
 
     public function store(Request $request)
     {
