@@ -42,7 +42,7 @@ class UserController extends Controller
                 'data' => $data,
             ];
 
-            return response()->json($output);
+            return Response::json($output);
         }
     }
 
