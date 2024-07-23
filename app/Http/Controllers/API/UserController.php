@@ -30,7 +30,7 @@ class UserController extends Controller
                 $row[] = $list->jenis_kelamin;
                 $row[] = $list->tanggal_lahir;
                 $row[] = '
-                <button onClick="editPengguna(' . $list->id . ')" class="btn btn-primary rounded"><i class="fas fa-pencil-alt"></i></button>';
+                        <button onClick="editPengguna(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>';
                 $data[] = $row;
             }
 

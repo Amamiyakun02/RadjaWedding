@@ -22,6 +22,8 @@ return new class extends Migration
             $table->enum('jenis_pengguna', ['pelanggan','vip','admin'])->default('pelanggan');
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->date('tanggal_lahir')->nullable();
+            $table->enum('status', ['aktif','nonaktif'])->default('aktif');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

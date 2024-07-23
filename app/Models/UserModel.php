@@ -18,6 +18,7 @@ class UserModel extends Authenticatable
     protected $request;
     protected $db;
     protected $dt;
+
     protected $table = 'users'; // Nama tabel sesuai dengan skema
 
     protected $fillable = [
@@ -41,6 +42,7 @@ class UserModel extends Authenticatable
     {
         return $this->hasMany(PenyewaanModel::class, 'UserID');
     }
+
     public function __construct(array $attributes = [], Request $request = null)
     {
         parent::__construct($attributes);

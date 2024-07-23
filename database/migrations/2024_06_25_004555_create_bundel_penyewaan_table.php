@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->decimal('total_harga', 10, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
