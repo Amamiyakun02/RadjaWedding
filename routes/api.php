@@ -1,11 +1,9 @@
 <?php
-
+use App\Http\Controllers\API\BarangController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\UserController;
-use App\Http\Controllers\API\BarangController;
-use App\Http\Controllers\API\LayananController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,7 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/users', UserController::class)->except(['index']);
 Route::post('users/index', [UserController::class, 'index']);
 
-
 //Api Barang
 Route::apiResource('/barang', BarangController::class)->except(['index']);
-Route::post('/barang/index', [BarangController::class,'index']);
+Route::post('/barang/index', [BarangController::class, 'index']);

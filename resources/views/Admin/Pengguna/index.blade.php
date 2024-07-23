@@ -9,6 +9,9 @@
                     <div class="card-header">
                         Pengguna
                     </div>
+                    <div id="success" class="d-none alert alert-success my-2" role="alert">
+                        Data pelanggan berhasil diperbarui !
+                    </div>
                     <div class="card-body">
                         <table id="user-table" class="table table-striped table-bordered table-hover w-100">
                             <thead>
@@ -45,27 +48,41 @@
                 <form>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
+                        <div id="err-usr" class="alert alert-danger d-none" role="alert">
+                        </div>
                         <input type="text" class="form-control" id="username" name="username" require>
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
+                        <div id="err-nm" class="alert alert-danger d-none" role="alert">
+                        </div>
                         <input type="text" class="form-control" id="nama" name="nama" require>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
+                        <div id="err-eml" class="alert alert-danger d-none" role="alert">
+                        </div>
                         <input type="email" class="form-control" id="email" name="email" require>
                     </div>
-                    <div class="mb-3">
-                        <label for="telepon" class="form-label">Telepon</label>
-                        <input type="number" class="form-control" id="telepon" name="telepon" require>
+                    <div class="input-group mb-3">
+                        <label for="alamat" class="form-label">Telepon</label>
+                        <div id="err-tlp" class="alert alert-danger d-none" role="alert">
+                        </div>
+                        <span for="telepon" class="input-group-text">+62</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" id="telepon"
+                            name="telepon" aria-describedby="inputGroup-sizing-default">
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
+                        <div id="err-alm" class="alert alert-danger d-none" role="alert">
+                        </div>
                         <textarea type="text" class="form-control" id="alamat" name="alamat" require></textarea>
                     </div>
 
                     <div class="form-group mb-4">
                         <label class="mr-sm-2" for="tipe">Tipe</label>
+                        <div id="err-tp" class="alert alert-danger d-none" role="alert">
+                        </div>
                         <select class="custom-select mr-sm-2" id="tipe">
                             <option selected>Pilih...</option>
                             <option value="vip">Pelanggan istimewa</option>
@@ -75,6 +92,8 @@
                     </div>
                     <div class="form-group mb-4">
                         <label class="mr-sm-2" for="jk">Jenis Kelamin</label>
+                        <div id="err-jk" class="alert alert-danger d-none" role="alert">
+                        </div>
                         <select class="custom-select mr-sm-2" id="jk">
                             <option selected>Pilih...</option>
                             <option value="L">Laki - laki</option>
@@ -83,6 +102,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="date" class="form-label">Tanggal Lahir</label>
+                        <div id="err-tgl" class="alert alert-danger d-none" role="alert">
+                        </div>
                         <input type="date" class="form-control" id="date" name="date" require>
                     </div>
                     <input type="hidden" class="form-control" id="id" name="id">
@@ -160,11 +181,17 @@ $('#btn-save').click(function() {
             tanggal_lahir: $('#date').val(),
         }),
         success: function(response) {
+            $('#success').removeClass('d-none'); // Menampilkan elemen dengan ID success
+            setTimeout(() => {
+                $('#success').addClass(
+                    'd-none'); // Menyembunyikan elemen dengan ID success setelah 3 detik
+            }, 3000); // 3000 milidetik = 3 detik
             console.log('Berhasil:', response);
-
+            $('#scrollable-modal').modal('hide');
+            table.ajax.reload();
         },
         error: function(xhr, status, error) {
-            console.log('Error:', error);
+            console.log(JSON.parse(xhr.responseText));
 
         }
     });

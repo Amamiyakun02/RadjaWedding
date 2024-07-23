@@ -66,22 +66,27 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        return response()->json($request->all(), 200);
-        $validated = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'sometimes|required|numeric',
-            'stock' => 'sometimes|required|integer',
-        ]);
 
-        $user = UserModel::find($id);
+        // $validated = $request->validate([
+        //     'name' => 'sometimes|required|string|max:255',
+        //     'description' => 'nullable|string',
+        //     'price' => 'sometimes|required|numeric',
+        //     'stock' => 'sometimes|required|integer',
+        // ]);
 
-        if ($user) {
-            $user->update($validated);
-            return response()->json($user, 200);
-        } else {
-            return response()->json(['message' => 'Customer not found'], 404);
-        }
+        // $user = UserModel::find($id);
+
+        // if ($user) {
+        //     $user->update($validated);
+        //     return response()->json($user, 200);
+        // } else {
+        //     return response()->json(['message' => 'Customer not found'], 404);
+        // }
+        $data = [
+            'msg' => 'Update Success',
+            'status' => 202,
+        ];
+        return response()->json($data, 404);
     }
 
     public function destroy($id)
