@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Api User
-Route::apiResource('/users', PenggunaController::class)->except(['index']);
-Route::post('users/index', [PenggunaController::class, 'index']);
+Route::apiResource('/users', UserController::class)->except(['index']);
+Route::post('users/index', [UserController::class, 'index']);
