@@ -55,8 +55,10 @@ class BarangController extends Controller
                 $row[] = $list->deskripsi;
                 $row[] = $list->harga;
                 $row[] = $list->stok;
-                $row[] = '<img src="' . Storage::url('barang/barang.png') . '" alt="' . $list->nama . '" style="width: 25px; height: 25px;">';
-                $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>';
+                $row[] = '<img src="' . asset('storage/app/barang/barang.png') . '" alt="' . $list->nama . '" style="width: 25px; height: 25px;">';
+                $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                <button onClick="deleteBarang(' . $list->id . ')" class="btn btn-danger"><i class="fas fa-trash"></i></button>'
+                ;
                 $row[] = $this->encodeImage('barang.png');
 
                 $data[] = $row;
@@ -91,6 +93,7 @@ class BarangController extends Controller
 
     public function update(Request $request, $id)
     {
+        return response()->json($request->all(), 200);
 
     }
     public function destroy($id)
