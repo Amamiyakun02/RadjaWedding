@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="w-25">
-                        <button id="tambah-barang" class="btn btn-success w-50 my-2"> <i
+                        <button id="tambah-layanan" class="btn btn-success w-50 my-2"> <i
                                 class="fas fa-plus mr-2"></i>Tambah</button>
                     </div>
 
@@ -30,12 +30,9 @@
                                 <tr>
                                     <td>No</td>
                                     <td>Nama</td>
-                                    <td>Jenis</td>
                                     <td>Deskripsi</td>
-                                    <td>Harga</td>
                                     <td>Foto</td>
-                                    <td>Stok</td>
-                                    <td>Aksi</td>
+                                    <td style="width:140px;text-align:center;">Aksi</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,36 +60,12 @@
                         </div>
                         <input type="text" class="form-control" id="nama" name="nama" require>
                     </div>
-                    <div class="form-group mb-4">
-                        <label class="mr-sm-2" for="tipe">Kategori</label>
-                        <div id="err-ktg" class="alert alert-danger d-none" role="alert">
-                        </div>
-                        <select class="custom-select mr-sm-2" id="kategori">
-                            <option selected>Pilih...</option>
-                            <option value="dekorasi">Dekorasi</option>
-                            <option value="gaun">Gaun</option>
-                            <option value="aksesoris">Aksesoris</option>
-                            <option value="lainnya">Lainnya</option>
 
-                        </select>
-                    </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <div id="err-dks" class="alert alert-danger d-none" role="alert">
                         </div>
                         <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" require></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="harga" class="form-label">Harga</label>
-                        <div id="err-hg" class="alert alert-danger d-none" role="alert">
-                        </div>
-                        <input type="number" class="form-control" id="harga" name="harga" require>
-                    </div>
-                    <div class="mb-3">
-                        <label for="stok" class="form-label">Stok</label>
-                        <div id="err-stk" class="alert alert-danger d-none" role="alert">
-                        </div>
-                        <input type="number" class="form-control" id="stok" name="stok" require>
                     </div>
                     <div class="mb-3">
                         <label for="stok" class="form-label">Foto</label>
@@ -135,37 +108,12 @@
                         </div>
                         <input type="text" class="form-control" id="nama-add" name="nama-add" require>
                     </div>
-                    <div class="form-group mb-4">
-                        <label class="mr-sm-2" for="tipe">Kategori</label>
-                        <div id="err-ktg-add" class="alert alert-danger d-none" role="alert">
-                        </div>
-                        <select class="custom-select mr-sm-2" id="kategori-add" name="kategori-add">
-                            <option value="" selected>Pilih...</option>
-                            <option value="dekorasi">Dekorasi</option>
-                            <option value="gaun">Gaun</option>
-                            <option value="aksesoris">Aksesoris</option>
-                            <option value="lainnya">Lainnya</option>
-
-                        </select>
-                    </div>
                     <div class="mb-3">
                         <label for="deskripsi-add" class="form-label">Deskripsi</label>
                         <div id="err-dks-add" class="alert alert-danger d-none" role="alert">
                         </div>
                         <textarea type="text" class="form-control" id="deskripsi-add" name="deskripsi-add"
                             require></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="harga-add" class="form-label">Harga</label>
-                        <div id="err-hg-add" class="alert alert-danger d-none" role="alert">
-                        </div>
-                        <input type="number" class="form-control" id="harga-add" name="harga-add" require>
-                    </div>
-                    <div class="mb-3">
-                        <label for="stok-add" class="form-label">Stok</label>
-                        <div id="err-stk-add" class="alert alert-danger d-none" role="alert">
-                        </div>
-                        <input type="number" class="form-control" id="stok-add" name="stok-add" require>
                     </div>
                     <div class="mb-3">
                         <label for="foto-add" class="form-label">Foto</label>
@@ -224,7 +172,7 @@ $(document).ready(function() {
         "serverSide": true,
         "order": [],
         "ajax": {
-            "url": "{{ url('api/barang/index')}}",
+            "url": "{{ url('api/layanan/index')}}",
             "type": "POST"
         },
         "columnDefs": [{
@@ -233,17 +181,14 @@ $(document).ready(function() {
         }],
     });
 
-    window.editBarang = function(id) {
+    window.editLayanan = function(id) {
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/barang/' + id,
+            url: 'http://127.0.0.1:8000/api/layanan/' + id,
             type: 'GET',
             success: function(data) {
                 $('#id').val(data.id);
                 $('#nama').val(data.nama);
                 $('#deskripsi').val(data.deskripsi);
-                $('#harga').val(data.harga);
-                $('#stok').val(data.stok);
-                $('#kategori').val(data.kategori);
                 $('#foto-label-edit').html(data.url_gambar);
                 $('#modal-edit').modal('show');
             },
@@ -349,7 +294,7 @@ $(document).ready(function() {
             }
         });
     });
-    $('#tambah-barang-btn').click(async function() {
+    $('#tambah-layanan-btn').click(async function() {
         const file = $('#foto-add')[0].files[0];
         var fileName
         var imageEncoded
@@ -366,21 +311,19 @@ $(document).ready(function() {
             fileName = '';
             imageEncoded = '';
         }
-        console.log(imageEncoded);
+
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/barang',
+            url: 'http://127.0.0.1:8000/api/layanan',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
                 nama: $('#nama-add').val(),
                 deskripsi: $('#deskripsi-add').val(),
-                harga: $('#harga-add').val(),
-                stok: $('#stok-add').val(),
-                kategori: $('#kategori-add').val(),
                 base64_image: imageEncoded,
 
             }),
             success: function(response) {
+                console.log('Berhasil:', response);
                 table.ajax.reload(null, false); // Memuat ulang DataTable
                 $('#success-add').removeClass(
                     'd-none'); // Menampilkan elemen dengan ID success
@@ -400,23 +343,9 @@ $(document).ready(function() {
                     $('#err-nm-add').text(msg.nama);
 
                 }
-                if (msg.kategori != undefined) {
-                    $('#err-ktg-add').removeClass('d-none');
-                    $('#err-ktg-add').text(msg.kategori);
-
-                }
                 if (msg.deskripsi != undefined) {
                     $('#err-dks-add').removeClass('d-none');
                     $('#err-dks-add').text(msg.deskripsi);
-
-                }
-                if (msg.harga != undefined) {
-                    $('#err-hg-add').removeClass('d-none');
-                    $('#err-hg-add').text(msg.harga);
-                }
-                if (msg.stok != undefined) {
-                    $('#err-stk-add').removeClass('d-none');
-                    $('#err-stk-add').text(msg.stok);
 
                 }
                 if (msg.base64_image != undefined) {
@@ -427,12 +356,9 @@ $(document).ready(function() {
         });
     });
 
-    $('#tambah-barang').click(() => {
+    $('#tambah-layanan').click(() => {
         $('#err-nm-add').addClass('d-none');
-        $('#err-ktg-add').addClass('d-none');
         $('#err-dks-add').addClass('d-none');
-        $('#err-hg-add').addClass('d-none');
-        $('#err-stk-add').addClass('d-none');
         $('#err-foto-add').addClass('d-none');
         $('#modal-tambah').modal('show');
     })
@@ -458,7 +384,7 @@ $(document).ready(function() {
                         'd-none'
                     ); // Menyembunyikan elemen dengan ID success setelah 3 detik
                 }, 3000); // 3000 milidetik = 3 detik
-                $('#hapus-barang').modal('hide');
+                $('#hapus-layanan').modal('hide');
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText);

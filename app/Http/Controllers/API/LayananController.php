@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\LayananModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -63,7 +63,7 @@ class LayananController extends Controller
                 $row[] = $no;
                 $row[] = $list->nama;
                 $row[] = $list->deskripsi;
-                $row[] = '<img src="' . asset($list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
+                $row[] = '<img src="' . asset('images/layanan/' . $list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
                 $row[] = '<button onClick="editLayanan(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
                           <button onClick="hapusLayanan(' . $list->id . ')" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
                 $data[] = $row;
@@ -82,6 +82,7 @@ class LayananController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
@@ -121,7 +122,6 @@ class LayananController extends Controller
             return response()->json(['msg' => 'Layanan Gagal Di Buat', 'error' => $e->getMessage()], 500);
         }
     }
-
 
     public function show($id)
     {

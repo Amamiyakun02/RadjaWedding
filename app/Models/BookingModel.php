@@ -34,7 +34,7 @@ class BookingModel extends Model
     {
         return $this->belongsTo(BundlePenyewaanModel::class, 'BundleID');
     }
-        public function __construct(array $attributes = [], Request $request = null)
+    public function __construct(array $attributes = [], Request $request = null)
     {
         parent::__construct($attributes);
 

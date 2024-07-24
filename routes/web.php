@@ -84,7 +84,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/layanan', function () {
         $data = [
             'title' => 'Layanan',
-            'breadcrumb' => 'Layanan',
+            'breadcrumb' => 'Data Layanan',
         ];
         return view('Admin.Layanan.index', $data);
     })->name('layanan');
