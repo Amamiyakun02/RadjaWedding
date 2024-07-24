@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\API\BarangController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\Auth\AutheticationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
  */
+
+Route::post('register', [AutheticationController::class, 'register'])->name('register.post');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -53,7 +53,7 @@ class AutheticationController extends Controller
             ],
             'telepon' => 'required|numeric|digits_between:11,15',
             'alamat' => 'required|string|max:255',
-            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan', // misalnya untuk Laki-laki atau Perempuan
+            'jenis_kelamin' => 'required|string|in:L,P', // misalnya untuk Laki-laki atau Perempuan
             'tanggal_lahir' => 'required|date',
         ], [
             'username.required' => 'Username harus diisi.',
@@ -90,7 +90,9 @@ class AutheticationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 422); // Menggunakan withInput() untuk mengembalikan input lama
         }
         DB::beginTransaction();
         try {
