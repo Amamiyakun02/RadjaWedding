@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
-use App\Models\UserModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +24,7 @@ class UserController extends Controller
                 $no++;
                 $row = [];
                 $row[] = $no;
+                $row[] = $list->username;
                 $row[] = $list->nama;
                 $row[] = $list->email;
                 $row[] = $list->telepon;
@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $user = UserModel::find($id);
         if ($user) {
-            return response()->json($user,200);
+            return response()->json($user, 200);
         } else {
             return response()->json(['msg' => 'Data Pengguna Tidak Ditemukan'], 404);
         }
@@ -137,7 +137,8 @@ class UserController extends Controller
             return response()->json(['msg' => 'Gagal Mengupdate Data Pengguna', 'error' => $e->getMessage()], 500);
         }
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         $user = UserModel::find($id);
 
         if ($user) {

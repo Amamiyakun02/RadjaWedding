@@ -13,10 +13,12 @@
                         Data pelanggan berhasil diperbarui !
                     </div>
                     <div class="card-body">
-                        <table id="user-table" class="table table-striped table-bordered table-hover w-100">
+                        <table id="user-table"
+                            class="table overflow-scroll table-striped table-bordered table-hover w-100">
                             <thead>
                                 <tr>
                                     <td>No</td>
+                                    <td>Username</td>
                                     <td>Nama</td>
                                     <td>Email</td>
                                     <td>Telepon</td>
@@ -64,13 +66,15 @@
                         </div>
                         <input type="email" class="form-control" id="email" name="email" require>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="mb-3">
                         <label for="alamat" class="form-label">Telepon</label>
                         <div id="err-tlp" class="alert alert-danger d-none" role="alert">
                         </div>
-                        <span for="telepon" class="input-group-text">+62</span>
-                        <input type="text" class="form-control" aria-label="Sizing example input" id="telepon"
-                            name="telepon" aria-describedby="inputGroup-sizing-default">
+                        <div class="input-group">
+                            <span for="telepon" class="input-group-text">+62</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" id="telepon"
+                                name="telepon" aria-describedby="inputGroup-sizing-default">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
@@ -126,6 +130,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    // Inisialisasi DataTable
     var table = $('#user-table').DataTable({
         "processing": true,
         "serverSide": true,
@@ -137,64 +142,111 @@ $(document).ready(function() {
         "columnDefs": [{
             "targets": [],
             "orderable": false,
-        }, ],
-    });
-});
-
-function editPengguna(id) {
-    $.ajax({
-        url: 'http://127.0.0.1:8000/api/users/' + id,
-        type: 'GET', // Bisa juga 'POST', 'PUT', 'DELETE', dll.
-        success: function(data) {
-            $('#id').val(data.id);
-            $('#username').val(data.username);
-            $('#nama').val(data.nama);
-            $('#email').val(data.email);
-            $('#telepon').val(data.telepon);
-            $('#alamat').val(data.alamat);
-            $('#jk').val(data.jenis_kelamin);
-            $('#tipe').val(data.jenis_pengguna);
-            $('#date').val(data.tanggal_lahir);
-            $('#scrollable-modal').modal('show');
-        },
-        error: function(xhr, status, error) {
-            console.log('Error: ' + error);
-        }
+        }],
     });
 
-}
+    // Fungsi untuk mengedit pengguna
+    window.editPengguna = function(id) {
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/users/' + id,
+            type: 'GET',
+            success: function(data) {
+                $('#id').val(data.id);
+                $('#username').val(data.username);
+                $('#nama').val(data.nama);
+                $('#email').val(data.email);
+                $('#telepon').val(data.telepon);
+                $('#alamat').val(data.alamat);
+                $('#jk').val(data.jenis_kelamin);
+                $('#tipe').val(data.jenis_pengguna);
+                $('#date').val(data.tanggal_lahir);
+                $('#scrollable-modal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.log('Error: ' + error);
+            }
+        });
+    };
 
-$('#btn-save').click(function() {
-    var id = $('#id').val();
-    $.ajax({
-        url: 'http://127.0.0.1:8000/api/users/' + id, // Ganti dengan URL endpoint PUT yang sesuai
-        type: 'PUT',
-        contentType: 'application/json', // Tipe konten, misalnya JSON
-        data: JSON.stringify({
-            username: $('#username').val(),
-            nama: $('#nama').val(),
-            email: $('#email').val(),
-            telepon: $('#telepon').val(),
-            alamat: $('#alamat').val(),
-            jenis_kelamin: $('#jk').val(),
-            jenis_pengguna: $('#tipe').val(),
-            tanggal_lahir: $('#date').val(),
-        }),
-        success: function(response) {
-            $('#success').removeClass('d-none'); // Menampilkan elemen dengan ID success
-            setTimeout(() => {
-                $('#success').addClass(
-                    'd-none'); // Menyembunyikan elemen dengan ID success setelah 3 detik
-            }, 3000); // 3000 milidetik = 3 detik
-            console.log('Berhasil:', response);
-            $('#scrollable-modal').modal('hide');
-            table.ajax.reload();
-        },
-        error: function(xhr, status, error) {
-            console.log(JSON.parse(xhr.responseText));
+    // Event handler untuk tombol simpan
+    $('#btn-save').click(function() {
+        var id = $('#id').val();
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/users/' + id,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                username: $('#username').val(),
+                nama: $('#nama').val(),
+                email: $('#email').val(),
+                telepon: $('#telepon').val(),
+                alamat: $('#alamat').val(),
+                jenis_kelamin: $('#jk').val(),
+                jenis_pengguna: $('#tipe').val(),
+                tanggal_lahir: $('#date').val(),
+            }),
+            success: function(response) {
+                table.ajax.reload(null, false); // Memuat ulang DataTable
+                $('#success').removeClass('d-none'); // Menampilkan elemen dengan ID success
+                setTimeout(() => {
+                    $('#success').addClass(
+                        'd-none'
+                    ); // Menyembunyikan elemen dengan ID success setelah 3 detik
+                }, 3000); // 3000 milidetik = 3 detik
+                console.log('Berhasil:', response);
+                $('#scrollable-modal').modal('hide');
+                $('#err-usr').addClass('d-none');
+                $('#err-nm').addClass('d-none');
+                $('#err-eml').addClass('d-none');
+                $('#err-tlp').addClass('d-none');
+                $('#err-alm').addClass('d-none');
+                $('#err-jk').addClass('d-none');
+                $('#err-tp').addClass('d-none');
+                $('#err-tgl').addClass('d-none');
+            },
+            error: function(xhr, status, error) {
+                var msg = JSON.parse(xhr.responseText);
+                if (msg.username != undefined) {
+                    $('#err-usr').removeClass('d-none');
+                    $('#err-usr').text(msg.username);
+                }
+                if (msg.nama != undefined) {
+                    $('#err-nm').removeClass('d-none');
+                    $('#err-nm').text(msg.nama);
 
-        }
+                }
+                if (msg.email != undefined) {
+                    $('#err-eml').removeClass('d-none');
+                    $('#err-eml').text(msg.email);
+
+                }
+                if (msg.telepon != undefined) {
+                    $('#err-tlp').removeClass('d-none');
+                    $('#err-tlp').text(msg.telepon);
+
+                }
+                if (msg.alamat != undefined) {
+                    $('#err-alm').removeClass('d-none');
+                    $('#err-alm').text(msg.alamat);
+
+                }
+                if (msg.jenis_kelamin != undefined) {
+                    $('#err-jk').removeClass('d-none');
+                    $('#err-jk').text(msg.jenis_kelamin);
+
+                }
+                if (msg.jenis_pengguna != undefined) {
+                    $('#err-tp').removeClass('d-none');
+                    $('#err-tp').text(msg.jenis_pengguna);
+                }
+                if (msg.tanggal_lahir != undefined) {
+                    $('#err-tgl').removeClass('d-none');
+                    $('#err-tgl').text(msg.tanggal_lahir);
+                }
+            }
+        });
     });
 });
 </script>
+
 @endsection
