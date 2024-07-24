@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -28,26 +27,6 @@ class BarangController extends Controller
         }
     }
 
-    private function encodeImage($fileName)
-    {
-        // Path ke gambar di folder public/images
-        $path = 'images/barang/' . $fileName;
-
-        if (!Storage::exists($path)) {
-            return response()->json(['message' => 'File not found'], 404);
-        }
-
-        // Membaca file gambar
-        $image = Storage::get($path);
-
-        // Mendapatkan tipe MIME dari gambar
-        $type = File::mimeType($path);
-
-        // Encode ke base64
-        $base64 = base64_encode($image);
-
-        return $base64;
-    }
     private function decodeImage($base64String, $namaBarang)
     {
         $base64String = preg_replace('/^data:image\/\w+;base64,/', '', $base64String);
@@ -92,8 +71,10 @@ class BarangController extends Controller
                 $row[] = $list->deskripsi;
                 $row[] = $list->harga;
                 $row[] = $list->stok;
-                $row[] = '<img src="' . asset('images/barang/' . $list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
-                $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>';
+
+                $row[] = '<img src="' . asset($list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
+                $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                          <button onClick="hapusBarang(' . $list->id . ')" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
                 $data[] = $row;
             }
 
@@ -131,7 +112,7 @@ class BarangController extends Controller
             'kategori.required' => 'Kategori harus diisi.',
             'kategori.string' => 'Kategori harus berupa teks.',
             'kategori.max' => 'Kategori maksimal 255 karakter.',
-            'base64_image.required' => 'Base64 image string harus diisi.',
+            'base64_image.required' => 'Gambar Tidak Boleh Kosong.',
             'base64_image.string' => 'Base64 image string harus berupa teks.',
         ]);
 
@@ -204,10 +185,11 @@ class BarangController extends Controller
         }
 
         DB::beginTransaction();
-        try {
-            $barang = BarangModel::findOrFail($id);
 
-            if ($barang) {
+        $barang = BarangModel::findOrFail($id);
+
+        if ($barang) {
+            try {
                 // Decode base64 image and save if provided
                 if ($request->has('base64_image') && !empty($request->base64_image)) {
                     // Delete the old image if it exists
@@ -231,12 +213,13 @@ class BarangController extends Controller
                 DB::commit();
 
                 return response()->json(['msg' => 'Barang Berhasil Di Perbarui'], 200);
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['msg' => 'Produk update failed', 'error' => $e->getMessage()], 500);
             }
-            return response()->json(['msg' => 'Barang Tidak Di Temukan'], 404);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['msg' => 'Produk update failed', 'error' => $e->getMessage()], 500);
         }
+        return response()->json(['msg' => 'Barang Tidak Di Temukan'], 404);
     }
     public function destroy($id)
     {
