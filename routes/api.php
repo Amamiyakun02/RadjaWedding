@@ -2,6 +2,7 @@
 use App\Http\Controllers\API\BarangController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\LayananController;
+use App\Http\Controllers\API\PaketController;
 use App\Http\Controllers\Auth\AutheticationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,10 @@ Route::post('users/index', [UserController::class, 'index']);
 Route::apiResource('/barang', BarangController::class)->except(['index']);
 Route::post('/barang/index', [BarangController::class, 'index']);
 
+//Layanan
 Route::apiResource('/layanan', LayananController::class)->except(['index']);
 Route::post('/layanan/index', [LayananController::class, 'index']);
+
+//Paket
+Route::apiResource('/paket', PaketController::class)->except(['index']);
+Route::post('/paket/index', [PaketController::class, 'index']);
