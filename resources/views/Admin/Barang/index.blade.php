@@ -6,6 +6,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    <div class="w-25">
+                        <button id="tambah-barang" class="btn btn-success w-50 my-2"> <i
+                                class="fas fa-plus mr-2"></i>Tambah</button>
+                    </div>
+
                     <div class="card-header">
                         Barang
                     </div>
@@ -42,7 +47,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="scrollableModalTitle">Edit Pengguna</h5>
+                <h5 class="modal-title" id="scrollableModalTitle">Edit Barang</h5>
             </div>
             <div class="modal-body">
                 <form>
@@ -94,16 +99,86 @@
                                 </div>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="foto" id="foto">
-                                    <label class="custom-file-label" for="foto">Choose file</label>
+                                    <label class="custom-file-label" id="foto-label-edit" for="foto"></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <input type="hidden" class="form-control" id="id" name="id">
                 </form>
-                <div id="imageContainer">
-                    <img id="previewImage" src="" alt="Image preview will appear here">
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="btn-save-edit" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollableModalTitle">Tambah Barang</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama</label>
+                        <div id="err-nm" class="alert alert-danger d-none" role="alert">
+                        </div>
+                        <input type="text" class="form-control" id="nama" name="nama" require>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="tipe">Kategori</label>
+                        <div id="err-ktg" class="alert alert-danger d-none" role="alert">
+                        </div>
+                        <select class="custom-select mr-sm-2" id="kategori">
+                            <option selected>Pilih...</option>
+                            <option value="dekorasi">Dekorasi</option>
+                            <option value="gaun">Gaun</option>
+                            <option value="aksesoris">Aksesoris</option>
+                            <option value="lainnya">Lainnya</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <div id="err-dks" class="alert alert-danger d-none" role="alert">
+                        </div>
+                        <textarea type="text" class="form-control" id="deskripsi" name="deskripsi" require></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="harga" class="form-label">Harga</label>
+                        <div id="err-hg" class="alert alert-danger d-none" role="alert">
+                        </div>
+                        <input type="number" class="form-control" id="harga" name="harga" require>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stok" class="form-label">Stok</label>
+                        <div id="err-stk" class="alert alert-danger d-none" role="alert">
+                        </div>
+                        <input type="number" class="form-control" id="stok" name="stok" require>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stok" class="form-label">Foto</label>
+                        <div id="err-foto" class="alert alert-danger d-none" role="alert">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="foto" id="foto">
+                                    <label class="custom-file-label" id="label-foto" for="foto">ayam</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" id="id" name="id">
+                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -142,7 +217,7 @@ $(document).ready(function() {
                 $('#harga').val(data.harga);
                 $('#stok').val(data.stok);
                 $('#kategori').val(data.kategori);
-                // $('#foto').val(data.url_gambar);
+                $('#foto-label-edit').html(data.url_gambar);
                 $('#modal-edit').modal('show');
             },
             error: function(xhr, status, error) {
@@ -174,7 +249,7 @@ $(document).ready(function() {
                 console.error('Error reading file:', error);
             }
         } else {
-            alert('Please select a file first!');
+            imageEncoded = '';
         }
         console.log(imageEncoded);
         $.ajax({
@@ -183,11 +258,11 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify({
                 nama: $('#nama').val(),
-                deskripi: $('#deskripsi').val(),
+                deskripsi: $('#deskripsi').val(),
                 harga: $('#harga').val(),
                 stok: $('#stok').val(),
                 kategori: $('#kategori').val(),
-                foto_decode: imageEncoded,
+                base64_image: imageEncoded,
 
             }),
             success: function(response) {
@@ -237,13 +312,18 @@ $(document).ready(function() {
                     $('#err-stk').text(msg.stok);
 
                 }
-                if (msg.foto != undefined) {
+                if (msg.base64_image != undefined) {
                     $('#err-ft').removeClass('d-none');
-                    $('#err-ft').text(msg.foto);
+                    $('#err-ft').text(msg.base64_image);
                 }
             }
         });
     });
+
+    $('#tambah-barang').click(() => {
+        $('#modal-tambah').modal('show');
+
+    })
 });
 </script>
 @endsection

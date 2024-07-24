@@ -93,7 +93,8 @@ class BarangController extends Controller
                 $row[] = $list->deskripsi;
                 $row[] = $list->harga;
                 $row[] = $list->stok;
-                $row[] = '<img src="' . asset('storage/app/barang/barang.png') . '" alt="' . $list->nama . '" style="width: 25px; height: 25px;">';
+                $row[] = '<img src="' . asset($list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
+
                 $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
                 <button onClick="deleteBarang(' . $list->id . ')" class="btn btn-danger"><i class="fas fa-trash"></i></button>'
                 ;
@@ -181,6 +182,7 @@ class BarangController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
