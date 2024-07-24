@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="card-header">
-                        Barang
+                        Jasa & Layanan
                     </div>
                     <div id="success" class="d-none alert alert-success my-2" role="alert">
                         Data layanan berhasil diperbarui !
@@ -50,7 +50,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="scrollableModalTitle">Edit Barang</h5>
+                <h5 class="modal-title" id="scrollableModalTitle">Edit Layanan</h5>
             </div>
             <div class="modal-body">
                 <form>
@@ -98,7 +98,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="scrollableModalTitle">Tambah Barang</h5>
+                <h5 class="modal-title" id="scrollableModalTitle">Tambah Layanan</h5>
             </div>
             <div class="modal-body">
                 <form>
@@ -147,17 +147,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-colored-header bg-danger">
-                <h4 class="modal-title" id="danger-header-modalLabel">Hapus Barang</h4>
+                <h4 class="modal-title" id="danger-header-modalLabel">Hapus Layanan</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <h5 class="mt-0">Hapus Barang</h5>
-                <p>Anda yakin ingin menghapus data ini, data barang akan di hapus permanen !</p>
+                <h5 class="mt-0">Hapus Layanan</h5>
+                <p>Anda yakin ingin menghapus data ini, data layanan akan di hapus permanen !</p>
                 <input type="hidden" id="id-hapus">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                <button type="button" id="hapus-barang-btn" class="btn btn-danger">Confirm</button>
+                <button type="button" id="hapus-layanan-btn" class="btn btn-danger">Confirm</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -227,7 +227,7 @@ $(document).ready(function() {
         }
         console.log(imageEncoded);
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/barang/' + id,
+            url: 'http://127.0.0.1:8000/api/layanan/' + id,
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -249,14 +249,13 @@ $(document).ready(function() {
                         'd-none'
                     ); // Menyembunyikan elemen dengan ID success setelah 3 detik
                 }, 3000); // 3000 milidetik = 3 detik
-                console.log('Berhasil:', response);
+
                 $('#modal-edit').modal('hide');
 
                 $('#err-nm').addClass('d-none');
-                $('#err-ktg').addClass('d-none');
+
                 $('#err-dks').addClass('d-none');
-                $('#err-hg').addClass('d-none');
-                $('#err-stk').addClass('d-none');
+
                 $('#err-ft').addClass('d-none');
 
             },
@@ -268,25 +267,13 @@ $(document).ready(function() {
                     $('#err-nm').text(msg.nama);
 
                 }
-                if (msg.kategori != undefined) {
-                    $('#err-ktg').removeClass('d-none');
-                    $('#err-ktg').text(msg.kategori);
 
-                }
                 if (msg.deskripsi != undefined) {
                     $('#err-dks').removeClass('d-none');
                     $('#err-dks').text(msg.deskripsi);
 
                 }
-                if (msg.harga != undefined) {
-                    $('#err-hg').removeClass('d-none');
-                    $('#err-hg').text(msg.harga);
-                }
-                if (msg.stok != undefined) {
-                    $('#err-stk').removeClass('d-none');
-                    $('#err-stk').text(msg.stok);
 
-                }
                 if (msg.base64_image != undefined) {
                     $('#err-ft').removeClass('d-none');
                     $('#err-ft').text(msg.base64_image);
@@ -363,16 +350,16 @@ $(document).ready(function() {
         $('#modal-tambah').modal('show');
     })
 
-    window.hapusBarang = (id) => {
-        $('#hapus-barang').modal('show');
+    window.hapusLayanan = (id) => {
+        $('#hapus-layanan').modal('show');
         $('#id-hapus').val(id);
     }
 
-    $('#hapus-barang-btn').click(() => {
+    $('#hapus-layanan-btn').click(() => {
         console.log($('#id-hapus').val());
         var id = $('#id-hapus').val();
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/barang/' + id,
+            url: 'http://127.0.0.1:8000/api/layanan/' + id,
             type: 'DELETE',
             contentType: 'application/json',
             success: function(response) {
@@ -387,7 +374,7 @@ $(document).ready(function() {
                 $('#hapus-layanan').modal('hide');
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseText);
+
             }
         });
     })

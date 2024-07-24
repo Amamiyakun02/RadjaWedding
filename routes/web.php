@@ -100,9 +100,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/penyewaan', function () {
         $data = [
             'title' => 'Penyewaan',
-            'breadcrumb' => 'Data Penyawaan',
+            'breadcrumb' => 'Data Penyewaan',
         ];
-        return view('Admin.Penyawaan.index', $data);
+        return view('Admin.Penyewaan.index', $data);
     })->name('penyewaan');
 
     Route::get('/riwayat', function () {

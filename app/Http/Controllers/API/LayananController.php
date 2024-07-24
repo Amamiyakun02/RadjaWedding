@@ -134,6 +134,7 @@ class LayananController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',

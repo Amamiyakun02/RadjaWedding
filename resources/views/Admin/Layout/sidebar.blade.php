@@ -26,6 +26,11 @@
                 </li>
                 <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('paket') }}" aria-expanded="false">
                         <i class="fas fa-box-open"></i>
+                        <span class="hide-menu">Paket</span>
+                    </a>
+                </li>
+                <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('penyewaan') }}" aria-expanded="false">
+                        <i class="fas fa-box-open"></i>
                         <span class="hide-menu">Bundle Penyewaan</span>
                     </a>
                 </li>
