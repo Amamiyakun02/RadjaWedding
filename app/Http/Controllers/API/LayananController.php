@@ -41,7 +41,7 @@ class LayananController extends Controller
 
         // Generate a unique filename
         $filename = Str::slug($namaLayanan) . '-' . Str::random(10) . '.jpg'; // Adjust extension based on image type
-        $path = public_path('images/barang/' . $filename);
+        $path = public_path('images/layanan/' . $filename);
 
         // Save the image
         File::put($path, $imageData);
@@ -85,9 +85,6 @@ class LayananController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'harga' => 'required|numeric',
-            'stok' => 'required|integer',
-            'kategori' => 'required|string|max:255',
             'base64_image' => 'required|string',
         ], [
             'nama.required' => 'Nama harus diisi.',
@@ -95,13 +92,6 @@ class LayananController extends Controller
             'nama.max' => 'Nama maksimal 255 karakter.',
             'deskripsi.required' => 'Deskripsi harus diisi.',
             'deskripsi.string' => 'Deskripsi harus berupa teks.',
-            'harga.required' => 'Harga harus diisi.',
-            'harga.numeric' => 'Harga harus berupa angka.',
-            'stok.required' => 'Stok harus diisi.',
-            'stok.integer' => 'Stok harus berupa angka bulat.',
-            'kategori.required' => 'Kategori harus diisi.',
-            'kategori.string' => 'Kategori harus berupa teks.',
-            'kategori.max' => 'Kategori maksimal 255 karakter.',
             'base64_image.required' => 'Gambar Tidak Boleh Kosong.',
             'base64_image.string' => 'Base64 image string harus berupa teks.',
         ]);
@@ -116,25 +106,22 @@ class LayananController extends Controller
             // Decode base64 image and save
             $filename = $this->decodeImage($request->base64_image, $request->nama);
 
-            // Create produk
-            $produk = BarangModel::create([
+            // Create layanan
+            $layanan = LayananModel::create([
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
-                'harga' => $request->harga,
-                'stok' => $request->stok,
-                'kategori' => $request->kategori,
                 'url_gambar' => $filename,
             ]);
 
             DB::commit();
 
-            return response()->json(['msg' => 'Barang Berhasil Di Buat'], 201);
+            return response()->json(['msg' => 'Layanan Berhasil Di Buat'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['msg' => 'Barang Gagal Di Buat', 'error' => $e->getMessage()], 500);
+            return response()->json(['msg' => 'Layanan Gagal Di Buat', 'error' => $e->getMessage()], 500);
         }
     }
-    }
+
 
     public function show($id)
     {
