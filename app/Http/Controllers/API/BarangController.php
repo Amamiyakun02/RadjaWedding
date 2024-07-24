@@ -157,10 +157,10 @@ class BarangController extends Controller
 
             DB::commit();
 
-            return response()->json(['msg' => 'Produk created successfully'], 201);
+            return response()->json(['msg' => 'Barang Berhasil Di Buat'], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['msg' => 'Produk creation failed', 'error' => $e->getMessage()], 500);
+            return response()->json(['msg' => 'Barang Gagal Di Buat', 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -170,7 +170,7 @@ class BarangController extends Controller
         if ($barang) {
             return response()->json($barang, 200);
         }
-        return response()->json(['msg' => 'Data Pengguna Tidak Ditemukan'], 404);
+        return response()->json(['msg' => 'Data Barang Tidak Ditemukan'], 404);
     }
 
     public function update(Request $request, $id)
@@ -204,7 +204,6 @@ class BarangController extends Controller
     }
 
     DB::beginTransaction();
-
     try {
         $barang = BarangModel::findOrFail($id);
 
@@ -231,9 +230,9 @@ class BarangController extends Controller
 
             DB::commit();
 
-            return response()->json(['msg' => 'Produk updated successfully'], 200);
+            return response()->json(['msg' => 'Barang Berhasil Di Perbarui'], 200);
         }
-        return response()->json(['msg' => 'Data tidak ditemukan'], 404);
+        return response()->json(['msg' => 'Barang Tidak Di Temukan'], 404);
     } catch (\Exception $e) {
         DB::rollBack();
         return response()->json(['msg' => 'Produk update failed', 'error' => $e->getMessage()], 500);
@@ -251,7 +250,7 @@ class BarangController extends Controller
 
             return response()->json(null, 204);
         } else {
-            return response()->json(['message' => 'Barang not found'], 404);
+            return response()->json(['message' => 'Barang Tidak di Temukan'], 404);
         }
     }
 }
