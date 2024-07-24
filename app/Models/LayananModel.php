@@ -37,7 +37,6 @@ class LayananModel extends Model
     {
         return $this->hasOne(BundleLayananModel::class, 'layananID');
     }
-
     public function __construct(array $attributes = [], Request $request = null)
     {
         parent::__construct($attributes);
@@ -104,5 +103,4 @@ class LayananModel extends Model
     {
         return $this->count();
     }
-
 }
