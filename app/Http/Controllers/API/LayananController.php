@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\LayananModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class LayananController extends Controller
@@ -49,9 +51,9 @@ class LayananController extends Controller
 
     public function index(Request $request)
     {
-        $barangModel = new LayananModel();
+        $layananModel = new LayananModel();
         if ($request->isMethod('post')) {
-            $lists = $barangModel->getDatatables($request);
+            $lists = $layananModel->getDatatables($request);
             $data = [];
             $no = $request->input('start');
 
@@ -69,8 +71,8 @@ class LayananController extends Controller
 
             $output = [
                 'draw' => $request->input('draw'),
-                'recordsTotal' => $barangModel->countAll(),
-                'recordsFiltered' => $barangModel->countFiltered($request),
+                'recordsTotal' => $layananModel->countAll(),
+                'recordsFiltered' => $layananModel->countFiltered($request),
                 'data' => $data,
             ];
 
@@ -80,7 +82,58 @@ class LayananController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'harga' => 'required|numeric',
+            'stok' => 'required|integer',
+            'kategori' => 'required|string|max:255',
+            'base64_image' => 'required|string',
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'nama.string' => 'Nama harus berupa teks.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            'deskripsi.required' => 'Deskripsi harus diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
+            'harga.required' => 'Harga harus diisi.',
+            'harga.numeric' => 'Harga harus berupa angka.',
+            'stok.required' => 'Stok harus diisi.',
+            'stok.integer' => 'Stok harus berupa angka bulat.',
+            'kategori.required' => 'Kategori harus diisi.',
+            'kategori.string' => 'Kategori harus berupa teks.',
+            'kategori.max' => 'Kategori maksimal 255 karakter.',
+            'base64_image.required' => 'Gambar Tidak Boleh Kosong.',
+            'base64_image.string' => 'Base64 image string harus berupa teks.',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Decode base64 image and save
+            $filename = $this->decodeImage($request->base64_image, $request->nama);
+
+            // Create produk
+            $produk = BarangModel::create([
+                'nama' => $request->nama,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'stok' => $request->stok,
+                'kategori' => $request->kategori,
+                'url_gambar' => $filename,
+            ]);
+
+            DB::commit();
+
+            return response()->json(['msg' => 'Barang Berhasil Di Buat'], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['msg' => 'Barang Gagal Di Buat', 'error' => $e->getMessage()], 500);
+        }
+    }
     }
 
     public function show($id)
