@@ -91,7 +91,6 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',

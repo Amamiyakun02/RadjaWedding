@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\API\BarangController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\LayananController;
 use App\Http\Controllers\Auth\AutheticationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,6 @@ Route::post('users/index', [UserController::class, 'index']);
 //Api Barang
 Route::apiResource('/barang', BarangController::class)->except(['index']);
 Route::post('/barang/index', [BarangController::class, 'index']);
+
+Route::apiResource('/layanan', LayananController::class)->except(['index']);
+Route::post('/layanan/index', [LayananController::class, 'index']);
