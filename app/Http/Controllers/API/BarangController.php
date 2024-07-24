@@ -20,13 +20,14 @@ class BarangController extends Controller
         $this->barangModel = new BarangModel();
     }
     private function deleteOldImage($url_gambar)
-{
-    $fullPath = storage_path('app/public/' . $url_gambar);
+    {
+        $fullPath = storage_path('app/public/' . $url_gambar);
 
-    if (File::exists($fullPath)) {
-        File::delete($fullPath);
+        if (File::exists($fullPath)) {
+            File::delete($fullPath);
+        }
     }
-}
+
     private function encodeImage($fileName)
     {
         // Path ke gambar di folder public/images
@@ -139,30 +140,30 @@ public function store(Request $request)
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        return response()->json($request->all());
-        //        DB::beginTransaction();
-//
-//        try {
-//            // Decode base64 image and save
-//            $filename = $this->decodeImage($request->base64_image, $request->nama);
-//
-//            // Create produk
-//            $produk = BarangModel::create([
-//                'nama' => $request->nama,
-//                'deskripsi' => $request->deskripsi,
-//                'harga' => $request->harga,
-//                'stok' => $request->stok,
-//                'kategori' => $request->kategori,
-//                'url_gambar' => $filename,
-//            ]);
-//
-//            DB::commit();
-//
-//            return response()->json(['message' => 'Produk created successfully', 'data' => $produk], 201);
-//        } catch (\Exception $e) {
-//            DB::rollBack();
-//            return response()->json(['message' => 'Produk creation failed', 'error' => $e->getMessage()], 500);
-//        }
+
+        DB::beginTransaction();
+
+        try {
+            // Decode base64 image and save
+            $filename = $this->decodeImage($request->base64_image, $request->nama);
+
+            // Create produk
+            $produk = BarangModel::create([
+                'nama' => $request->nama,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'stok' => $request->stok,
+                'kategori' => $request->kategori,
+                'url_gambar' => $filename,
+            ]);
+
+            DB::commit();
+
+            return response()->json(['msg' => 'Produk created successfully'], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['msg' => 'Produk creation failed', 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function show($id)
@@ -241,13 +242,17 @@ public function store(Request $request)
     }
     public function destroy($id)
     {
-        $barang = $this->barangModel->find($id);
+    $barang = $this->barangModel->find($id);
 
-        if ($barang) {
-            $barang->delete();
-            return response()->json(null, 204);
-        } else {
-            return response()->json(['message' => 'Customer not found'], 404);
-        }
+    if ($barang) {
+        // Hapus gambar dari storage
+        $this->deleteOldImage($barang->url_gambar);
+        // Hapus entri dari database
+        $barang->delete();
+
+        return response()->json(null, 204);
+    } else {
+        return response()->json(['message' => 'Barang not found'], 404);
+    }
     }
 }
