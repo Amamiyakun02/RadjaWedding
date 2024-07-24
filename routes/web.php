@@ -1,20 +1,19 @@
 <?php
 
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\Auth\AutheticationController as Authentication;
-//Admin Controller
-use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\LayananController;
+//Admin Controller
 use App\Http\Controllers\Admin\PaketController;
+use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\PenyewaanController;
-use App\Http\Controllers\Admin\PengembalianBarangController;
 use App\Http\Controllers\Admin\PesananController;
 use App\Http\Controllers\Admin\RiwayatController;
+use App\Http\Controllers\Auth\AutheticationController as Authentication;
+use App\Http\Controllers\Customer\BookingController as CustomerBookingController;
 
 //Customer Controller
 use App\Http\Controllers\Customer\PenyewaanController as CustomerPenyewaanController;
-use App\Http\Controllers\Customer\BookingController as CustomerBookingController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,15 +25,14 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 //Route::get('/', function () {
 //    return view('welcome');
 //});
 
 //Default Routes
-Route::get('/',[MainController::class,'index']);
-
+Route::get('/', [MainController::class, 'index']);
 
 //Route Authentikasi
 //Route Login
@@ -56,12 +54,12 @@ Route::get('/customers/', function () {
 Route::prefix('admin')->group(function () {
 //    Admin Dashboard
     Route::get('/dashboard', function () {
-    $data = [
-        'title' => 'Dashboard',
-        'breadcrumb' => 'Dashboard',
-    ];
-    return view('Admin.Dashboard.index', $data);
-})->name('admin.dashboard');
+        $data = [
+            'title' => 'Dashboard',
+            'breadcrumb' => 'Dashboard',
+        ];
+        return view('Admin.Dashboard.index', $data);
+    })->name('admin.dashboard');
 //Route Pengguna
     Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
     Route::get('/pengguna/create', [PenggunaController::class, 'create'])->name('pengguna.create');
@@ -95,11 +93,9 @@ Route::prefix('admin')->group(function () {
     Route::put('/layanan/update/{id}', [LayananController::class, 'update'])->name('layanan.update');
     Route::delete('/layanan/delete/{id}', [LayananController::class, 'destroy'])->name('layanan.delete');
 
-
 //Route Booking
     Route::get('/pesanan', [PesananController::class, 'index'])->name('booking');
     Route::get('pesanan/tambah', [PesananController::class, 'create'])->name('booking.create');
-
 
 //Route Penyewaan
     Route::get('/penyewaan', [PenyewaanController::class, 'index'])->name('penyewaan');
@@ -113,11 +109,10 @@ Route::prefix('admin')->group(function () {
 
 //Routes Customer
 Route::prefix('customer')->group(function () {
-    Route::get('/',[CustomerBookingController::class,'index'])->name('customer');
-    Route::get('/',[CustomerPenyewaanController::class,'index'])->name('customer');
+    Route::get('/', [CustomerBookingController::class, 'index'])->name('customer');
+    Route::get('/', [CustomerPenyewaanController::class, 'index'])->name('customer');
 
 });
-
 
 Route::get('/', function () {
     $data = [
@@ -126,4 +121,3 @@ Route::get('/', function () {
     ];
     return view('Admin.Dashboard.index', $data);
 });
-
