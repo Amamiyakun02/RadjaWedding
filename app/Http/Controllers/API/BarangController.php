@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -73,7 +72,7 @@ class BarangController extends Controller
                 $row[] = $list->harga;
                 $row[] = $list->stok;
 
-                $row[] = '<img src="' . asset($list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
+                $row[] = '<img src="' . asset('images/barang/' . $list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
                 $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
                           <button onClick="hapusBarang(' . $list->id . ')" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
                 $data[] = $row;
@@ -92,6 +91,7 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
@@ -188,7 +188,7 @@ class BarangController extends Controller
 
         $barang = BarangModel::findOrFail($id);
 
-        if($barang) {
+        if ($barang) {
             try {
                 // Decode base64 image and save if provided
                 if ($request->has('base64_image') && !empty($request->base64_image)) {
@@ -223,6 +223,7 @@ class BarangController extends Controller
     }
     public function destroy($id)
     {
+
         $barang = $this->barangModel->find($id);
 
         if ($barang) {
