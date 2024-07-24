@@ -211,6 +211,13 @@ $(document).ready(function() {
             url: 'http://127.0.0.1:8000/api/barang/' + id,
             type: 'GET',
             success: function(data) {
+                $('#err-nm').addClass('d-none');
+                $('#err-ktg').addClass('d-none');
+                $('#err-dks').addClass('d-none');
+                $('#err-hg').addClass('d-none');
+                $('#err-stk').addClass('d-none');
+                $('#err-ft').addClass('d-none');
+
                 $('#id').val(data.id);
                 $('#nama').val(data.nama);
                 $('#deskripsi').val(data.deskripsi);
