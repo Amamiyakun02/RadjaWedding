@@ -21,7 +21,7 @@ class BarangController extends Controller
     }
     private function deleteOldImage($url_gambar)
     {
-        $fullPath = storage_path('app/public/' . $url_gambar);
+        $fullPath = public_path('images/barang/' . $url_gambar);
 
         if (File::exists($fullPath)) {
             File::delete($fullPath);
@@ -31,7 +31,7 @@ class BarangController extends Controller
     private function encodeImage($fileName)
     {
         // Path ke gambar di folder public/images
-        $path = 'barang/' . $fileName;
+        $path = 'images/barang/' . $fileName;
 
         if (!Storage::exists($path)) {
             return response()->json(['message' => 'File not found'], 404);
@@ -67,13 +67,12 @@ class BarangController extends Controller
 
         // Generate a unique filename
         $filename = Str::slug($namaBarang) . '-' . Str::random(10) . '.jpg'; // Adjust extension based on image type
-        $path = public_path('storage/barang/' . $filename);
+        $path = public_path('images/barang/' . $filename);
 
         // Save the image
         File::put($path, $imageData);
 
-        return 'storage/barang/' . $filename;
-
+        return $filename;
     }
 
     public function index(Request $request)
@@ -93,10 +92,8 @@ class BarangController extends Controller
                 $row[] = $list->deskripsi;
                 $row[] = $list->harga;
                 $row[] = $list->stok;
-                $row[] = '<img src="' . Storage::url('barang/barang.png') . '" alt="' . $list->nama . '" style="width: 25px; height: 25px;">';
+                $row[] = '<img src="' . asset($list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
                 $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>';
-                $row[] = $this->encodeImage('barang.png');
-
                 $data[] = $row;
             }
 
@@ -170,50 +167,49 @@ public function store(Request $request)
     {
         $barang = $this->barangModel->find($id);
         if ($barang) {
-//            $barang['gambar'] = $this->encodeImage('barang.png');
             return response()->json($barang, 200);
         }
         return response()->json(['msg' => 'Data Pengguna Tidak Ditemukan'], 404);
-
     }
 
     public function update(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'harga' => 'required|numeric',
-            'stok' => 'required|integer',
-            'kategori' => 'required|string|max:255',
-            'base64_image' => 'sometimes|required|string',
-        ], [
-            'nama.required' => 'Nama harus diisi.',
-            'nama.string' => 'Nama harus berupa teks.',
-            'nama.max' => 'Nama maksimal 255 karakter.',
-            'deskripsi.required' => 'Deskripsi harus diisi.',
-            'deskripsi.string' => 'Deskripsi harus berupa teks.',
-            'harga.required' => 'Harga harus diisi.',
-            'harga.numeric' => 'Harga harus berupa angka.',
-            'stok.required' => 'Stok harus diisi.',
-            'stok.integer' => 'Stok harus berupa angka bulat.',
-            'kategori.required' => 'Kategori harus diisi.',
-            'kategori.string' => 'Kategori harus berupa teks.',
-            'kategori.max' => 'Kategori maksimal 255 karakter.',
-            'base64_image.required' => 'Base64 image string harus diisi.',
-            'base64_image.string' => 'Base64 image string harus berupa teks.',
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'nama' => 'required|string|max:255',
+        'deskripsi' => 'required|string',
+        'harga' => 'required|numeric',
+        'stok' => 'required|integer',
+        'kategori' => 'required|string|max:255',
+        'base64_image' => 'sometimes|nullable|string',
+    ], [
+        'nama.required' => 'Nama harus diisi.',
+        'nama.string' => 'Nama harus berupa teks.',
+        'nama.max' => 'Nama maksimal 255 karakter.',
+        'deskripsi.required' => 'Deskripsi harus diisi.',
+        'deskripsi.string' => 'Deskripsi harus berupa teks.',
+        'harga.required' => 'Harga harus diisi.',
+        'harga.numeric' => 'Harga harus berupa angka.',
+        'stok.required' => 'Stok harus diisi.',
+        'stok.integer' => 'Stok harus berupa angka bulat.',
+        'kategori.required' => 'Kategori harus diisi.',
+        'kategori.string' => 'Kategori harus berupa teks.',
+        'kategori.max' => 'Kategori maksimal 255 karakter.',
+        'base64_image.sometimes' => 'Base64 image string harus diisi jika ada.',
+        'base64_image.string' => 'Base64 image string harus berupa teks.',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+    }
 
-        DB::beginTransaction();
+    DB::beginTransaction();
 
-        try {
-            $barang = BarangModel::findOrFail($id);
+    try {
+        $barang = BarangModel::findOrFail($id);
 
+        if($barang){
             // Decode base64 image and save if provided
-            if ($request->has('base64_image')) {
+            if ($request->has('base64_image') && !empty($request->base64_image)) {
                 // Delete the old image if it exists
                 $this->deleteOldImage($barang->url_gambar);
 
@@ -235,24 +231,26 @@ public function store(Request $request)
             DB::commit();
 
             return response()->json(['msg' => 'Produk updated successfully'], 200);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['msg' => 'Produk update failed', 'error' => $e->getMessage()], 500);
-            }
+        }
+        return response()->json(['msg' => 'Data tidak ditemukan'], 404);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['msg' => 'Produk update failed', 'error' => $e->getMessage()], 500);
     }
+}
     public function destroy($id)
     {
-    $barang = $this->barangModel->find($id);
+        $barang = $this->barangModel->find($id);
 
-    if ($barang) {
-        // Hapus gambar dari storage
-        $this->deleteOldImage($barang->url_gambar);
-        // Hapus entri dari database
-        $barang->delete();
+        if ($barang) {
+            // Hapus gambar dari storage
+            $this->deleteOldImage($barang->url_gambar);
+            // Hapus entri dari database
+            $barang->delete();
 
-        return response()->json(null, 204);
-    } else {
-        return response()->json(['message' => 'Barang not found'], 404);
-    }
+            return response()->json(null, 204);
+        } else {
+            return response()->json(['message' => 'Barang not found'], 404);
+        }
     }
 }
