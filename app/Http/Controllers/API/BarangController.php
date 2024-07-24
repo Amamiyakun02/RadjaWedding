@@ -72,7 +72,7 @@ class BarangController extends Controller
                 $row[] = $list->harga;
                 $row[] = $list->stok;
 
-                $row[] = '<img src="' . asset($list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
+                $row[] = '<img src="' . asset('images/barang/' . $list->url_gambar) . '" alt="' . $list->url_gambar . '" style="width: 70px; height: 70px;">';
                 $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
                           <button onClick="hapusBarang(' . $list->id . ')" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
                 $data[] = $row;
@@ -223,7 +223,6 @@ class BarangController extends Controller
     }
     public function destroy($id)
     {
-        return response()->json(['message' => 'Barang Tidak di Temukan'], 404);
 
         $barang = $this->barangModel->find($id);
 

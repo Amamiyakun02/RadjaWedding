@@ -20,6 +20,9 @@
                     <div id="success-add" class="d-none alert alert-success my-2" role="alert">
                         Data pelanggan berhasil ditambahkan !
                     </div>
+                    <div id="success-hapus" class="d-none alert alert-success my-2" role="alert">
+                        Data pelanggan berhasil dihapus !
+                    </div>
                     <div class="card-body">
                         <table id="user-table"
                             class="table overflow-scroll table-striped table-bordered table-hover w-100">
@@ -191,7 +194,7 @@
         </div>
     </div>
 </div>
-<div id="modal-hapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel"
+<div id="hapus-barang" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -206,7 +209,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                <button type="button" id="hapus-barang-btn" class="btn btn-danger">Save changes</button>
+                <button type="button" id="hapus-barang-btn" class="btn btn-danger">Confirm</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -434,22 +437,31 @@ $(document).ready(function() {
         $('#modal-tambah').modal('show');
     })
 
-    function hapusBarang(id) {
-        $('#modal-hapus').modal('show');
+    window.hapusBarang = (id) => {
+        $('#hapus-barang').modal('show');
         $('#id-hapus').val(id);
     }
 
-    $('hapus-barang-btn').click(() => {
+    $('#hapus-barang-btn').click(() => {
+        console.log($('#id-hapus').val());
         var id = $('#id-hapus').val();
         $.ajax({
             url: 'http://127.0.0.1:8000/api/barang/' + id,
             type: 'DELETE',
             contentType: 'application/json',
             success: function(response) {
-
+                table.ajax.reload(null, false); // Memuat ulang DataTable
+                $('#success-hapus').removeClass(
+                    'd-none'); // Menampilkan elemen dengan ID success
+                setTimeout(() => {
+                    $('#success-hapus').addClass(
+                        'd-none'
+                    ); // Menyembunyikan elemen dengan ID success setelah 3 detik
+                }, 3000); // 3000 milidetik = 3 detik
+                $('#hapus-barang').modal('hide');
             },
             error: function(xhr, status, error) {
-
+                console.log(xhr.responseText);
             }
         });
     })
