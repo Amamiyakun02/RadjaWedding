@@ -38,7 +38,7 @@ class LayananController extends Controller
         }
 
         // Generate a unique filename
-        $filename = Str::slug($namaBarang) . '-' . Str::random(10) . '.jpg'; // Adjust extension based on image type
+        $filename = Str::slug($namaLayanan) . '-' . Str::random(10) . '.jpg'; // Adjust extension based on image type
         $path = public_path('images/barang/' . $filename);
 
         // Save the image
