@@ -1,20 +1,12 @@
 <?php
 
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\Auth\AutheticationController as Authentication;
 //Admin Controller
-use App\Http\Controllers\Admin\PenggunaController;
-use App\Http\Controllers\Admin\BarangController;
-use App\Http\Controllers\Admin\LayananController;
-use App\Http\Controllers\Admin\PaketController;
-use App\Http\Controllers\Admin\PenyewaanController;
-use App\Http\Controllers\Admin\PengembalianBarangController;
-use App\Http\Controllers\Admin\PesananController;
-use App\Http\Controllers\Admin\RiwayatController;
+use App\Http\Controllers\Auth\AutheticationController as Authentication;
+use App\Http\Controllers\Customer\BookingController as CustomerBookingController;
 
 //Customer Controller
 use App\Http\Controllers\Customer\PenyewaanController as CustomerPenyewaanController;
-use App\Http\Controllers\Customer\BookingController as CustomerBookingController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,15 +18,14 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 //Route::get('/', function () {
 //    return view('welcome');
 //});
 
 //Default Routes
-Route::get('/',[MainController::class,'index']);
-
+Route::get('/', [MainController::class, 'index']);
 
 //Route Authentikasi
 //Route Login
@@ -58,44 +49,93 @@ Route::get('/customers/', function () {
 Route::prefix('admin')->group(function () {
 //    Admin Dashboard
     Route::get('/dashboard', function () {
-    $data = [
-        'title' => 'Dashboard',
-        'breadcrumb' => 'Dashboard',
-    ];
-    return view('Admin.Dashboard.index', $data);
-})->name('admin.dashboard');
+        $data = [
+            'title' => 'Dashboard',
+            'breadcrumb' => 'Dashboard',
+        ];
+        return view('Admin.Dashboard.index', $data);
+    })->name('admin.dashboard');
 //Route Pengguna
-    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
 
-//Routes Barang
-    Route::get('/barang', [BarangController::class, 'index'])->name('barang');
+    Route::get('/pengguna', function () {
+        $data = [
+            'title' => 'Pengguna',
+            'breadcrumb' => 'Data pengguna',
+        ];
+        return view('Admin.Pengguna.index', $data);
+    })->name('pengguna');
 
-//Routes Paket
-    Route::get('/paket', [PaketController::class, 'index'])->name('paket');
+    Route::get('/barang', function () {
+        $data = [
+            'title' => 'Barang',
+            'breadcrumb' => 'Data Barang',
+        ];
+        return view('Admin.Barang.index', $data);
+    })->name('barang');
 
-//Routes Layanan
-    Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
+    Route::get('/paket', function () {
+        $data = [
+            'title' => 'Paket',
+            'breadcrumb' => 'Data Paket',
+        ];
+        return view('Admin.Paket.index', $data);
+    })->name('paket');
 
-//Route Booking
-    Route::get('/pesanan', [PesananController::class, 'index'])->name('booking');
+    Route::get('/layanan', function () {
+        $data = [
+            'title' => 'Layanan',
+            'breadcrumb' => 'Data Layanan',
+        ];
+        return view('Admin.Layanan.index', $data);
+    })->name('layanan');
 
-//Route Penyewaan
-    Route::get('/penyewaan', [PenyewaanController::class, 'index'])->name('penyewaan');
+    Route::get('/pesanan', function () {
+        $data = [
+            'title' => 'pesanan',
+            'breadcrumb' => 'Data Pesanan',
+        ];
+        return view('Admin.Pesanan.index', $data);
+    })->name('pesanan');
 
-//Route Pembayaran
-    Route::get('/pembayaran', [PenyewaanController::class, 'create'])->name('pembayaran');
+    Route::get('/penyewaan', function () {
+        $data = [
+            'title' => 'Penyewaan',
+            'breadcrumb' => 'Data Penyewaan',
+        ];
+        return view('Admin.Penyewaan.index', $data);
+    })->name('penyewaan');
 
-    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+    Route::get('/riwayat', function () {
+        $data = [
+            'title' => 'Riwayat',
+            'breadcrumb' => 'Data Riwayat',
+        ];
+        return view('Admin.Riwayat.index', $data);
+    })->name('riwayat');
+
+    Route::get('/pengembalian', function () {
+        $data = [
+            'title' => 'Pengembalian',
+            'breadcrumb' => 'Data Pengembalian',
+        ];
+        return view('Admin.Pengembalian.index', $data);
+    })->name('pengembalian');
+
+    Route::get('/booking', function () {
+        $data = [
+            'title' => 'Boking',
+            'breadcrumb' => 'Data Boking',
+        ];
+        return view('Admin.Booking.index', $data);
+    })->name('booking');
 });
-
 
 //Routes Customer
 Route::prefix('customer')->group(function () {
-    Route::get('/',[CustomerBookingController::class,'index'])->name('customer');
-    Route::get('/',[CustomerPenyewaanController::class,'index'])->name('customer');
+    Route::get('/', [CustomerBookingController::class, 'index'])->name('customer');
+    Route::get('/', [CustomerPenyewaanController::class, 'index'])->name('customer');
 
 });
-
 
 Route::get('/', function () {
     $data = [
@@ -104,4 +144,3 @@ Route::get('/', function () {
     ];
     return view('Admin.Dashboard.index', $data);
 });
-

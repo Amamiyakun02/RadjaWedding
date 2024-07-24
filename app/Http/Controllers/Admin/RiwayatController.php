@@ -10,10 +10,10 @@ class RiwayatController extends Controller
     {
         $data = [
             'title' => 'Data Pengguna | RADJA WEDDING',
-            'breadcrumb' => 'Pengguna'
+            'breadcrumb' => 'Data Riwayat',
         ];
 //        $users = $this->userModel->paginate(10);
-        return view('Admin.Riwayat.index', $data, compact(''));
+        return view('Admin.Riwayat.index', $data);
     }
 
     public function create()
@@ -21,15 +21,18 @@ class RiwayatController extends Controller
 
     }
 
-    public function show($id){
+    public function show($id)
+    {
 
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
 
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
     }
 }

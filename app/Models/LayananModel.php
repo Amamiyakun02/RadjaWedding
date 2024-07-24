@@ -26,7 +26,7 @@ class LayananModel extends Model
         'nama',
         'deskripsi',
         'url_gambar',
-     ];
+    ];
 
     public function detailBookings()
     {
@@ -37,7 +37,7 @@ class LayananModel extends Model
     {
         return $this->hasOne(BundleLayananModel::class, 'layananID');
     }
-   public function __construct(array $attributes = [], Request $request = null)
+    public function __construct(array $attributes = [], Request $request = null)
     {
         parent::__construct($attributes);
 
