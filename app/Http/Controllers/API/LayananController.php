@@ -134,7 +134,57 @@ class LayananController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'base64_image' => 'sometimes|nullable|string',
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'nama.string' => 'Nama harus berupa teks.',
+            'nama.max' => 'Nama maksimal 255 karakter.',
+            'deskripsi.required' => 'Deskripsi harus diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
+            'base64_image.sometimes' => 'Base64 image string harus diisi jika ada.',
+            'base64_image.string' => 'Base64 image string harus berupa teks.',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        DB::beginTransaction();
+
+        $layanan = LayananModel::findOrFail($id);
+
+        if ($layanan) {
+            try {
+                // Decode base64 image and save if provided
+                if ($request->has('base64_image') && !empty($request->base64_image)) {
+                    // Delete the old image if it exists
+                    $this->deleteOldImage($layanan->url_gambar);
+
+                    $url_gambar = $this->decodeImage($request->base64_image, $request->nama);
+                } else {
+                    $url_gambar = $layanan->url_gambar; // Keep the existing image URL if no new image is provided
+                }
+
+                // Update layanan
+                $layanan->update([
+                    'nama' => $request->nama,
+                    'deskripsi' => $request->deskripsi,
+                    'url_gambar' => $url_gambar,
+                ]);
+
+                DB::commit();
+
+                return response()->json(['msg' => 'Layanan Berhasil Diperbarui'], 200);
+
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json(['msg' => 'Layanan gagal diperbarui', 'error' => $e->getMessage()], 500);
+            }
+        }
+        return response()->json(['msg' => 'Layanan tidak ditemukan'], 404);
     }
 
     public function destroy($id)
