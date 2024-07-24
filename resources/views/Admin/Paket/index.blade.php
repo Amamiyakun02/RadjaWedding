@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="w-25">
-                        <button id="tambah-barang" class="btn btn-success w-50 my-2"> <i
+                        <button id="tambah-paket" class="btn btn-success w-50 my-2"> <i
                                 class="fas fa-plus mr-2"></i>Tambah</button>
                     </div>
 
@@ -204,9 +204,8 @@ $(document).ready(function() {
         });
     });
     $('#tambah-paket-btn').click(async function() {
-
         $.ajax({
-            url: 'http://127.0.0.1:8000/api/barang',
+            url: 'http://127.0.0.1:8000/api/paket',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -241,9 +240,10 @@ $(document).ready(function() {
         });
     });
 
-    $('#tambah-barang').click(() => {
+    $('#tambah-paket').click(() => {
         $('#err-nm-add').addClass('d-none');
         $('#err-dks-add').addClass('d-none');
+        $('#modal-tambah').modal('show');
     })
 
     window.hapusPaket = (id) => {

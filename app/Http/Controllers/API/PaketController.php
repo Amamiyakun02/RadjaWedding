@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\BundlePenyewaanModel;
-use App\Models\LayananModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -26,6 +25,7 @@ class PaketController extends Controller
                 $row[] = $no;
                 $row[] = $list->nama;
                 $row[] = $list->deskripsi;
+                $row[] = $list->total_harga;
                 $row[] = '<button onClick="editPaket(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
                           <button onClick="hapusPaket(' . $list->id . ')" class="btn btn-danger"><i class="fas fa-trash"></i></button>';
                 $data[] = $row;
