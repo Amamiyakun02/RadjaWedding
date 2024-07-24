@@ -238,17 +238,19 @@ $(document).ready(function() {
     $('#btn-save-edit').click(async function() {
         var id = $('#id').val();
         const file = $('#foto')[0].files[0];
-        const fileName = file.name;
-        var imageEncoded = ''
-        if (file) {
+        var fileName
+        var imageEncoded
+        if (file !== undefined) {
             try {
                 const base64String = await readFileAsDataURL(file);
                 imageEncoded = base64String;
+                fileName = file.name
 
             } catch (error) {
                 console.error('Error reading file:', error);
             }
         } else {
+            fileName = '';
             imageEncoded = '';
         }
         console.log(imageEncoded);
@@ -275,7 +277,7 @@ $(document).ready(function() {
                     ); // Menyembunyikan elemen dengan ID success setelah 3 detik
                 }, 3000); // 3000 milidetik = 3 detik
                 console.log('Berhasil:', response);
-                $('#scrollable-modal').modal('hide');
+                $('#modal-edit').modal('hide');
 
                 $('#err-nm').addClass('d-none');
                 $('#err-ktg').addClass('d-none');
