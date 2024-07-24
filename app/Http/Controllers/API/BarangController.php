@@ -7,6 +7,7 @@ use App\Models\BarangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -15,27 +16,28 @@ class BarangController extends Controller
     {
         $this->barangModel = new BarangModel();
     }
-    public function encodeImage($filename)
+    public function encodeImage($fileName)
     {
         // Path ke gambar di folder public/images
-        $path = public_path('images/' . $filename);
+        $path = 'barang/' . $fileName;
 
-        if (!File::exists($path)) {
+        if (!Storage::exists($path)) {
             return response()->json(['message' => 'File not found'], 404);
         }
 
         // Membaca file gambar
-        $image = File::get($path);
+        $image = Storage::get($path);
 
         // Mendapatkan tipe MIME dari gambar
-        $type = File::mimeType($path);
+//        $type = File::mimeType($path);
 
         // Encode ke base64
         $base64 = base64_encode($image);
 
         // Format base64 untuk digunakan di HTML atau API
-        $base64Image = 'data:' . $type . ';base64,' . $base64;
-        return $base64Image;
+//        $base64Image = 'data:' . $type . ';base64,' . $base64;
+//        return $base64Image;
+        return $base64;
     }
     public function index(Request $request)
     {
@@ -54,7 +56,7 @@ class BarangController extends Controller
                 $row[] = $list->deskripsi;
                 $row[] = $list->harga;
                 $row[] = $list->stok;
-//                $row[] = '<img src="{{ asset() }}" alt="'. $list->nama .'" style="width: 25px; height: 25px;">';
+                $row[] = '<img src="' . Storage::url('barang/' . $list->url_gambar) . '" alt="' . $list->nama . '" style="width: 25px; height: 25px;">';
                 $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>';
                 $row[] = $this->encodeImage('barang.png');
 
@@ -81,8 +83,12 @@ class BarangController extends Controller
     public function show($id)
     {
         $barang = $this->barangModel->find($id);
-        $barang['gambar'] = $this->encodeImage('barang.png');
-        return response()->json($barang,200);
+        if($barang){
+//            $barang['gambar'] = $this->encodeImage('barang.png');
+            return response()->json($barang,200);
+        }
+        return response()->json(['msg' => 'Data Pengguna Tidak Ditemukan'], 404);
+
     }
 
     public function update(Request $request, $id)
