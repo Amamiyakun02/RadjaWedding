@@ -24,7 +24,7 @@ class LayananModel extends Model
         'nama',
         'deskripsi',
         'url_gambar',
-     ];
+    ];
 
     public function detailBookings()
     {
@@ -35,5 +35,5 @@ class LayananModel extends Model
     {
         return $this->hasOne(BundleLayananModel::class, 'layananID');
     }
-//    DONE
+
 }

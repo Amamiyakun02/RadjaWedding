@@ -1,13 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\BarangController;
-use App\Http\Controllers\Admin\LayananController;
 //Admin Controller
-use App\Http\Controllers\Admin\PaketController;
-use App\Http\Controllers\Admin\PenggunaController;
-use App\Http\Controllers\Admin\PenyewaanController;
-use App\Http\Controllers\Admin\PesananController;
-use App\Http\Controllers\Admin\RiwayatController;
 use App\Http\Controllers\Auth\AutheticationController as Authentication;
 use App\Http\Controllers\Customer\BookingController as CustomerBookingController;
 
@@ -63,27 +56,78 @@ Route::prefix('admin')->group(function () {
         return view('Admin.Dashboard.index', $data);
     })->name('admin.dashboard');
 //Route Pengguna
-    Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
 
-//Routes Barang
-    Route::get('/barang', [BarangController::class, 'index'])->name('barang');
+    Route::get('/pengguna', function () {
+        $data = [
+            'title' => 'Pengguna',
+            'breadcrumb' => 'Data pengguna',
+        ];
+        return view('Admin.Pengguna.index', $data);
+    })->name('pengguna');
 
-//Routes Paket
-    Route::get('/paket', [PaketController::class, 'index'])->name('paket');
+    Route::get('/barang', function () {
+        $data = [
+            'title' => 'Barang',
+            'breadcrumb' => 'Data Barang',
+        ];
+        return view('Admin.Barang.index', $data);
+    })->name('barang');
 
-//Routes Layanan
-    Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
+    Route::get('/paket', function () {
+        $data = [
+            'title' => 'Paket',
+            'breadcrumb' => 'Data Paket',
+        ];
+        return view('Admin.Paket.index', $data);
+    })->name('paket');
 
-//Route Booking
-    Route::get('/pesanan', [PesananController::class, 'index'])->name('booking');
+    Route::get('/layanan', function () {
+        $data = [
+            'title' => 'Layanan',
+            'breadcrumb' => 'Layanan',
+        ];
+        return view('Admin.Layanan.index', $data);
+    })->name('layanan');
 
-//Route Penyewaan
-    Route::get('/penyewaan', [PenyewaanController::class, 'index'])->name('penyewaan');
+    Route::get('/pesanan', function () {
+        $data = [
+            'title' => 'pesanan',
+            'breadcrumb' => 'Data Pesanan',
+        ];
+        return view('Admin.Pesanan.index', $data);
+    })->name('pesanan');
 
-//Route Pembayaran
-    Route::get('/pembayaran', [PenyewaanController::class, 'create'])->name('pembayaran');
+    Route::get('/penyewaan', function () {
+        $data = [
+            'title' => 'Penyewaan',
+            'breadcrumb' => 'Data Penyawaan',
+        ];
+        return view('Admin.Penyawaan.index', $data);
+    })->name('penyewaan');
 
-    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+    Route::get('/riwayat', function () {
+        $data = [
+            'title' => 'Riwayat',
+            'breadcrumb' => 'Data Riwayat',
+        ];
+        return view('Admin.Riwayat.index', $data);
+    })->name('riwayat');
+
+    Route::get('/pengembalian', function () {
+        $data = [
+            'title' => 'Pengembalian',
+            'breadcrumb' => 'Data Pengembalian',
+        ];
+        return view('Admin.Pengembalian.index', $data);
+    })->name('pengembalian');
+
+    Route::get('/booking', function () {
+        $data = [
+            'title' => 'Boking',
+            'breadcrumb' => 'Data Boking',
+        ];
+        return view('Admin.Booking.index', $data);
+    })->name('booking');
 });
 
 //Routes Customer

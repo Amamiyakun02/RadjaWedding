@@ -15,13 +15,13 @@
                         Barang
                     </div>
                     <div id="success" class="d-none alert alert-success my-2" role="alert">
-                        Data pelanggan berhasil diperbarui !
+                        Data layanan berhasil diperbarui !
                     </div>
                     <div id="success-add" class="d-none alert alert-success my-2" role="alert">
-                        Data pelanggan berhasil ditambahkan !
+                        Data layanan berhasil ditambahkan !
                     </div>
                     <div id="success-hapus" class="d-none alert alert-success my-2" role="alert">
-                        Data pelanggan berhasil dihapus !
+                        Data layanan berhasil dihapus !
                     </div>
                     <div class="card-body">
                         <table id="user-table"
@@ -189,12 +189,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="tambah-barang-btn" type="button" class="btn btn-primary">Save changes</button>
+                <button id="tambah-layanan-btn" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-<div id="hapus-barang" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel"
+<div id="hapus-layanan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

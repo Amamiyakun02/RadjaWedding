@@ -34,13 +34,12 @@
                         <span class="hide-menu">Booking</span>
                     </a>
                 </li>
-                <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('pembayaran') }}"
-                        aria-expanded="false">
-                        <i class="fas fa-credit-card"></i>
-                        <span class="hide-menu">Pembayaran</span>
+                <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('riwayat') }}" aria-expanded="false">
+                        <i class="fas fa-list-alt"></i>
+                        <span class="hide-menu">Riwayat</span>
                     </a>
                 </li>
-                <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('pembayaran') }}"
+                <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('pengembalian') }}"
                         aria-expanded="false">
                         <i class="fas fa-clipboard-list"></i>
                         <span class="hide-menu">Pengembalian Barang</span>
