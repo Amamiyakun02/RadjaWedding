@@ -45,6 +45,12 @@ class AutheticationController extends Controller
                 'min:8',
                 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/', // huruf besar, angka, dan simbol
             ],
+            'repassword' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/', // huruf besar, angka, dan simbol
+            ],
             'telepon' => 'required|numeric|digits_between:11,15',
             'alamat' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan', // misalnya untuk Laki-laki atau Perempuan
@@ -66,6 +72,10 @@ class AutheticationController extends Controller
             'password.string' => 'Password harus berupa teks.',
             'password.min' => 'Password minimal 8 karakter.',
             'password.regex' => 'Password harus mengandung setidaknya satu huruf besar, satu angka, dan satu simbol.',
+            'repassword.required' => 'Password harus diisi.',
+            'repassword.string' => 'Password harus berupa teks.',
+            'repassword.min' => 'Password minimal 8 karakter.',
+            'repassword.regex' => 'Password harus mengandung setidaknya satu huruf besar, satu angka, dan satu simbol.',
             'telepon.required' => 'Nomor telepon harus diisi.',
             'telepon.numeric' => 'Nomor telepon harus berupa angka.',
             'telepon.digits_between' => 'Nomor telepon harus antara 11 hingga 15 digit.',
