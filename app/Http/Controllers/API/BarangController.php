@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\BarangModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
@@ -56,7 +55,7 @@ class BarangController extends Controller
                 $row[] = $list->deskripsi;
                 $row[] = $list->harga;
                 $row[] = $list->stok;
-                $row[] = '<img src="' . Storage::url('barang/' . $list->url_gambar) . '" alt="' . $list->nama . '" style="width: 25px; height: 25px;">';
+                $row[] = '<img src="' . Storage::url('barang/barang.png') . '" alt="' . $list->nama . '" style="width: 25px; height: 25px;">';
                 $row[] = '<button onClick="editBarang(' . $list->id . ')" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>';
                 $row[] = $this->encodeImage('barang.png');
 
@@ -79,13 +78,12 @@ class BarangController extends Controller
 
     }
 
-
     public function show($id)
     {
         $barang = $this->barangModel->find($id);
-        if($barang){
+        if ($barang) {
 //            $barang['gambar'] = $this->encodeImage('barang.png');
-            return response()->json($barang,200);
+            return response()->json($barang, 200);
         }
         return response()->json(['msg' => 'Data Pengguna Tidak Ditemukan'], 404);
 
@@ -95,7 +93,8 @@ class BarangController extends Controller
     {
 
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         $barang = $this->barangModel->find($id);
 
         if ($barang) {

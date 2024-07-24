@@ -12,11 +12,19 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>{{ $title }}</title>
     <!-- Custom CSS -->
+    <script src="{{ asset('Assets/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <link href="{{ asset('Assets/assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('Assets/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('Assets/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="{{ asset('Assets/css/style.min.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
 
 </head>
 
@@ -52,18 +60,22 @@
                         <a href="{{ route('admin.dashboard') }}">
                             <b class="logo-icon">
                                 <!-- Dark Logo icon -->
-                                <img src="{{ asset('Assets/assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
+                                <img src="{{ asset('Assets/assets/images/logo-icon.png') }}" alt="homepage"
+                                    class="dark-logo" />
                                 <!-- Light Logo icon -->
-                                <img src="{{ asset('Assets/assets/images/logo-icon.png') }}" alt="homepage" class="light-logo" />
+                                <img src="{{ asset('Assets/assets/images/logo-icon.png') }}" alt="homepage"
+                                    class="light-logo" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <h3 class="dark-logo">Radja Wedding</h3>
                                 <!-- dark Logo text -->
-{{--                                <img src="{{ asset('Assets/assets/images/logo-text.png') }}" alt="homepage" class="dark-logo" />--}}
+                                {{--                                <img src="{{ asset('Assets/assets/images/logo-text.png') }}"
+                                alt="homepage" class="dark-logo" />--}}
                                 <!-- Light Logo text -->
-{{--                                <img src="{{ asset('Assets/assets/images/logo-light-text.png') }}" class="light-logo" alt="homepage" />--}}
+                                {{--                                <img src="{{ asset('Assets/assets/images/logo-light-text.png') }}"
+                                class="light-logo" alt="homepage" />--}}
                             </span>
                         </a>
                     </div>
@@ -92,7 +104,7 @@
                                 id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <span><i data-feather="bell" class="svg-icon"></i></span>
-{{--                                <span class="badge badge-primary notify-no rounded-circle">5</span>--}}
+                                {{--                                <span class="badge badge-primary notify-no rounded-circle">5</span>--}}
                             </a>
                             <div class="dropdown-menu dropdown-menu-left mailbox animated bounceInDown">
                                 <ul class="list-style-none">
@@ -188,8 +200,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('Assets/assets/images/users/profile-pic.jpg') }}" alt="user" class="rounded-circle"
-                                    width="40">
+                                <img src="{{ asset('Assets/assets/images/users/profile-pic.jpg') }}" alt="user"
+                                    class="rounded-circle" width="40">
                                 <span class="ml-2 d-none d-lg-inline-block">
                                     <span class="text-dark">Admin</span>
                                     <i data-feather="chevron-down" class="svg-icon"></i>
@@ -240,7 +252,8 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Selamat Datang, Admin!</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Selamat Datang, Admin!
+                        </h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -252,8 +265,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-right">
-                            <div id="dateSelect" class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-{{--                                <option selected>Aug 19</option>--}}
+                            <div id="dateSelect"
+                                class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                                {{--                                <option selected>Aug 19</option>--}}
                             </div>
                         </div>
                     </div>
@@ -299,8 +313,8 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- All Jquery -->
-        <!-- ============================================================== -->
-    <script src="{{ asset('Assets/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <!-- ============================================================== -->
+
     <script src="{{ asset('Assets/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
     <script src="{{ asset('Assets/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- apps -->
@@ -315,22 +329,23 @@
     <script src="{{ asset('Assets/assets/extra-libs/c3/d3.min.js') }}"></script>
     <script src="{{ asset('Assets/assets/extra-libs/c3/c3.min.js') }}"></script>
     <script src="{{ asset('Assets/assets/libs/chartist/dist/chartist.min.js') }}"></script>
-    <script src="{{ asset('Assets/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="{{ asset('Assets/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}">
+    </script>
     <script src="{{ asset('Assets/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('Assets/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('Assets/js/pages/dashboards/dashboard1.min.js') }}"></script>
     <script>
-        var today = new Date();
-        // Daftar nama bulan dalam bahasa Inggris
-        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var today = new Date();
+    // Daftar nama bulan dalam bahasa Inggris
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-        // Mendapatkan bulan dan tanggal
-        var month = months[today.getMonth()]; // Menggunakan index bulan dari 0 hingga 11
-        var date = today.getDate();
+    // Mendapatkan bulan dan tanggal
+    var month = months[today.getMonth()]; // Menggunakan index bulan dari 0 hingga 11
+    var date = today.getDate();
 
-        // Menampilkan hasilnya di dalam elemen div
-        document.getElementById("dateSelect").innerText = month + " " + date;
-
+    // Menampilkan hasilnya di dalam elemen div
+    document.getElementById("dateSelect").innerText = month + " " + date;
     </script>
 </body>
+
 </html>

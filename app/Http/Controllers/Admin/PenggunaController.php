@@ -20,7 +20,7 @@ class PenggunaController extends Controller
     {
         $data = [
             'title' => 'Data Pengguna | RADJA WEDDING',
-            'breadcrumb' => 'Pengguna'
+            'breadcrumb' => 'Pengguna',
         ];
         $users = $this->userModel->paginate(10);
         return view('Admin.Pengguna.index', $data, compact('users'));
@@ -35,7 +35,8 @@ class PenggunaController extends Controller
         return view('Admin.Pengguna.create', $data);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         // Definisikan aturan validasi
         $rules = [
             'username' => 'required|string|max:255|unique:users,username',
@@ -88,26 +89,28 @@ class PenggunaController extends Controller
         return redirect()->to('/login')->with('success', 'Registrasi Berhasil');
     }
 
-    public function show($id){
-        $userData = $this->userModel->find($id);
+    public function show()
+    {
+        $userData = $this->userModel->find();
 
-        if($userData) {
+        if ($userData) {
             return response()->json($userData, 200);
         }
         return response()->json(['error' => 'Data Pengguna tidak ditemukan'], 404);
     }
 
-
-    public function edit($id){
-
-    }
-
-    public function update(Request $request, $id){
+    public function edit($id)
+    {
 
     }
 
+    public function update(Request $request, $id)
+    {
 
-    public function destroy($id){
+    }
+
+    public function destroy($id)
+    {
 
     }
 }
