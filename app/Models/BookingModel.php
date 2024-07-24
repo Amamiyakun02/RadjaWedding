@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\DB;
 class BookingModel extends Model
 {
     use HasFactory;
+    protected $column_order = ['id']; // Kolom yang bisa diurutkan
+    protected $column_search = [
+        'UserID',
+        'tanggal_pemesanan',
+        'tanggal_layanan',
+        'total_harga',
+        'status',
+        'BundleID',
+    ];
+    protected $order = ['id' => 'desc']; // Default order
+    protected $request;
+    protected $db;
+    protected $dt;
+
     protected $table = 'bookings';
     protected $fillable = [
         'UserID',

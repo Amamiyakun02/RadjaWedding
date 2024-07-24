@@ -23,7 +23,6 @@ class BarangModel extends Model
     protected $db;
     protected $dt;
 
-
    protected $table = 'barang'; // Nama tabel sesuai dengan skema
 
     /**
