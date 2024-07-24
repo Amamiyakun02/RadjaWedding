@@ -13,14 +13,14 @@ class LayananController extends Controller
 {
     private function deleteOldImage($url_gambar)
     {
-        $fullPath = public_path('images/barang/' . $url_gambar);
+        $fullPath = public_path('images/layanan/' . $url_gambar);
 
         if (File::exists($fullPath)) {
             File::delete($fullPath);
         }
     }
 
-    private function decodeImage($base64String, $namaBarang)
+    private function decodeImage($base64String, $namaLayanan)
     {
         $base64String = preg_replace('/^data:image\/\w+;base64,/', '', $base64String);
         $imageData = base64_decode($base64String);
