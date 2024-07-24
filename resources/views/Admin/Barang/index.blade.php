@@ -182,7 +182,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="btn-save-edit" type="button" class="btn btn-primary">Save changes</button>
+                <button id="tambah-barang-btn" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -321,10 +321,94 @@ $(document).ready(function() {
             }
         });
     });
+    $('#tambah-barang-btn').click(async function() {
+        var id = $('#id').val();
+        const file = $('#foto')[0].files[0];
+        var fileName
+        var imageEncoded
+        if (file !== undefined) {
+            try {
+                const base64String = await readFileAsDataURL(file);
+                imageEncoded = base64String;
+                fileName = file.name
+
+            } catch (error) {
+                console.error('Error reading file:', error);
+            }
+        } else {
+            fileName = '';
+            imageEncoded = '';
+        }
+        console.log(imageEncoded);
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/barang/' + id,
+            type: 'Post',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                nama: $('#nama').val(),
+                deskripsi: $('#deskripsi').val(),
+                harga: $('#harga').val(),
+                stok: $('#stok').val(),
+                kategori: $('#kategori').val(),
+                base64_image: imageEncoded,
+
+            }),
+            success: function(response) {
+                table.ajax.reload(null, false); // Memuat ulang DataTable
+                $('#success').removeClass(
+                    'd-none'); // Menampilkan elemen dengan ID success
+                setTimeout(() => {
+                    $('#success').addClass(
+                        'd-none'
+                    ); // Menyembunyikan elemen dengan ID success setelah 3 detik
+                }, 3000); // 3000 milidetik = 3 detik
+                console.log('Berhasil:', response);
+                $('#modal-tambah').modal('hide');
+                $('#err-nm').addClass('d-none');
+                $('#err-ktg').addClass('d-none');
+                $('#err-dks').addClass('d-none');
+                $('#err-hg').addClass('d-none');
+                $('#err-stk').addClass('d-none');
+                $('#err-ft').addClass('d-none');
+
+            },
+            error: function(xhr, status, error) {
+                var msg = JSON.parse(xhr.responseText);
+
+                if (msg.nama != undefined) {
+                    $('#err-nm').removeClass('d-none');
+                    $('#err-nm').text(msg.nama);
+
+                }
+                if (msg.kategori != undefined) {
+                    $('#err-ktg').removeClass('d-none');
+                    $('#err-ktg').text(msg.kategori);
+
+                }
+                if (msg.deskripsi != undefined) {
+                    $('#err-dks').removeClass('d-none');
+                    $('#err-dks').text(msg.deskripsi);
+
+                }
+                if (msg.harga != undefined) {
+                    $('#err-hg').removeClass('d-none');
+                    $('#err-hg').text(msg.harga);
+                }
+                if (msg.stok != undefined) {
+                    $('#err-stk').removeClass('d-none');
+                    $('#err-stk').text(msg.stok);
+
+                }
+                if (msg.base64_image != undefined) {
+                    $('#err-ft').removeClass('d-none');
+                    $('#err-ft').text(msg.base64_image);
+                }
+            }
+        });
+    });
 
     $('#tambah-barang').click(() => {
         $('#modal-tambah').modal('show');
-
     })
 });
 </script>
