@@ -30,11 +30,10 @@
                                 <tr>
                                     <td>No</td>
                                     <td>Nama</td>
-                                    <td>Jenis</td>
-                                    <td>Deskripsi</td>
+                                    <td>Tanggal Pemesanan</td>
+                                    <td>Status</td>
+                                    <td>Nama Paket</td>
                                     <td>Harga</td>
-                                    <td>Foto</td>
-                                    <td>Stok</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
@@ -224,7 +223,7 @@ $(document).ready(function() {
         "serverSide": true,
         "order": [],
         "ajax": {
-            "url": "{{ url('api/barang/index')}}",
+            "url": "{{ url('api/booking/index')}}",
             "type": "POST"
         },
         "columnDefs": [{

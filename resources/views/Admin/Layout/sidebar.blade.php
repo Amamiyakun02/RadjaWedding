@@ -29,11 +29,7 @@
                         <span class="hide-menu">Paket</span>
                     </a>
                 </li>
-                <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('penyewaan') }}" aria-expanded="false">
-                        <i class="fas fa-box-open"></i>
-                        <span class="hide-menu">Bundle Penyewaan</span>
-                    </a>
-                </li>
+
                 <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('booking') }}" aria-expanded="false">
                         <i data-feather="file-text" class="feather-icon"></i>
                         <span class="hide-menu">Booking</span>
