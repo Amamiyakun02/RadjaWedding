@@ -1,9 +1,13 @@
 <?php
 use App\Http\Controllers\API\BarangController;
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\BookingController;
 use App\Http\Controllers\API\LayananController;
 use App\Http\Controllers\API\PaketController;
+use App\Http\Controllers\API\RiwayatController;
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\PengembalianBarang;
 use App\Http\Controllers\Auth\AutheticationController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +43,12 @@ Route::post('/layanan/index', [LayananController::class, 'index']);
 //Paket
 Route::apiResource('/paket', PaketController::class)->except(['index']);
 Route::post('/paket/index', [PaketController::class, 'index']);
+
+Route::apiResource('/booking', BookingController::class)->except(['index']);
+Route::post('/booking/index', [BookingController::class, 'index']);
+
+Route::apiResource('/riwayat', RiwayatController::class)->except(['index']);
+Route::post('/riwayat/index', [RiwayatController::class, 'index']);
+
+Route::apiResource('/pengembalian', PengembalianBarang::class)->except(['index']);
+Route::post('/pengembalian/index', [PengembalianBarang::class, 'index']);
